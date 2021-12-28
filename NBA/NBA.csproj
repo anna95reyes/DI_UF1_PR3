@@ -136,6 +136,13 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\icons\icons8-add-64.png" />
+    <Content Include="Assets\icons\icons8-cancel-48.png" />
+    <Content Include="Assets\icons\icons8-clear-filter-50.png" />
+    <Content Include="Assets\icons\icons8-delete-64.png" />
+    <Content Include="Assets\icons\icons8-pen-squared-48.png" />
+    <Content Include="Assets\icons\icons8-reduce-48.png" />
+    <Content Include="Assets\icons\icons8-save-50.png" />
     <Content Include="Assets\NBA-logo.png" />
     <Content Include="Assets\nba_images\arenas\aaa_logo.jpg" />
     <Content Include="Assets\nba_images\arenas\aaa_photo.jpg" />
@@ -288,6 +295,7 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Scripts\er_diagram_nba.png" />
     <Content Include="Scripts\nba_demo_dump.sql" />
   </ItemGroup>
   <ItemGroup>

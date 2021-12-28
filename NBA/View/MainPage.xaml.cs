@@ -63,16 +63,12 @@ namespace NBA
                     {
                         copiarArxiusICarpetesAssets(f, i, folder);
                     }
-                    
                 }
-                
             }
             else if (files[index].IsOfType(StorageItemTypes.File))
             {
-                
                 ((StorageFile)files[index]).CopyAsync(appDataFolder);
             }
-
         }
 
         private void NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
@@ -87,6 +83,5 @@ namespace NBA
             }
         }
 
-        
     }
 }
