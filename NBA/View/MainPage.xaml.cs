@@ -48,7 +48,7 @@ namespace NBA
             for (int i = 0; i < files.Count; i++)
             {
                 copiarArxiusICarpetesAssets(files, i, appDataFolder);
-            }
+            }   
         }
 
         private async void copiarArxiusICarpetesAssets(IReadOnlyList<IStorageItem> files, int index, StorageFolder appDataFolder)
