@@ -53,7 +53,7 @@
                         <controls:DataGridTemplateColumn Header="Logo">
                             <controls:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Source="{Binding team_logo}" Width="80"></Image>
+                                    <Image Source="{Binding TeamLogo}" Width="80"></Image>
                                 </DataTemplate>
                             </controls:DataGridTemplateColumn.CellTemplate>
                         </controls:DataGridTemplateColumn>
