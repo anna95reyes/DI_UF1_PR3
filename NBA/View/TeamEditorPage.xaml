@@ -1,4 +1,5 @@
-﻿<Page
+﻿<Page 
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps" 
     x:Class="NBA.View.TeamEditorPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -23,7 +24,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <!-- costat esquerre -->
-            <Grid Grid.Column="0" Margin="10" Background="LightGray">
+            <Grid Grid.Column="0" Margin="20 10" Background="LightGray">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
@@ -44,9 +45,20 @@
                         <TextBlock Text="Clear filter" VerticalAlignment="Center" Margin="5 0 0 0"/>
                     </StackPanel>
                 </Button>
-                <controls:DataGrid x:Name="dgrTeams" Grid.Row="1" Grid.ColumnSpan="3" Margin="10" 
-                                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    
+                <controls:DataGrid x:Name="dgrTeams" Grid.Row="1" Grid.ColumnSpan="3" Margin="10" MaxHeight="800"
+                                   AutoGenerateColumns="False" CanUserSortColumns="False" IsReadOnly="True"
+                                   GridLinesVisibility="Vertical" AlternatingRowBackground="#FFE2E2E2">
+                    <controls:DataGrid.Columns>
+                        
+                        <controls:DataGridTemplateColumn Header="Logo">
+                            <controls:DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding team_logo}" Width="80"></Image>
+                                </DataTemplate>
+                            </controls:DataGridTemplateColumn.CellTemplate>
+                        </controls:DataGridTemplateColumn>
+                        
+                    </controls:DataGrid.Columns>                   
                 </controls:DataGrid>
             </Grid>
             <!-- Costat central -->
@@ -64,9 +76,9 @@
                     <RowDefinition Height="*"/>     <!-- logo -->
                     <RowDefinition Height="auto"/>  <!-- arena -->
                     <RowDefinition Height="*"/>     <!-- logo -->
-                    <RowDefinition Height="2*"/>    <!-- about -->
+                    <RowDefinition Height="*"/>    <!-- about -->
                     <RowDefinition Height="auto"/>  <!-- capacity -->
-                    <RowDefinition Height="2*"/>    <!-- photo -->
+                    <RowDefinition Height="1.5*"/>    <!-- photo -->
                     <RowDefinition Height="auto"/>  <!-- buttons -->
                 </Grid.RowDefinitions>
                 <Button x:Name="btnAddTeam" Grid.Row="0" Grid.Column="0" Margin="10">
@@ -85,8 +97,13 @@
 
                 <TextBlock Grid.Row="3" Grid.Column="1" Text="Logo" FontWeight="Bold" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 <Grid Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Margin="10">
-                    <Image x:Name="imgLogoTeam" Grid.Row="3" Grid.Column="2" Margin="10" MaxHeight="200"
-                       Source="/Assets/nba_images/teams/BOS.svg" HorizontalAlignment="Left"/>
+                    <Image x:Name="imgLogoTeam" Grid.Row="3" Grid.Column="2" Margin="10" Height="100"
+                           HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Image.Source>
+                            <SvgImageSource UriSource="ms-appx:///Assets/nba_images/teams/BOS.svg"
+                                RasterizePixelHeight="400" RasterizePixelWidth="400" />
+                        </Image.Source>
+                    </Image>
                     <Button x:Name="btnUpdateImgLogoTeam" HorizontalAlignment="Right" VerticalAlignment="Center" 
                             Margin="10" Padding="5 0" Background="LightGray">
                         <StackPanel Orientation="Horizontal">
@@ -103,7 +120,7 @@
 
                 <Grid Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Margin="10" >
                     <Image x:Name="imgLogoArena" Margin="10" Source="/Assets/nba_images/arenas/td_garden_logo.png" 
-                           MaxWidth="200" HorizontalAlignment="Left"/>
+                           MaxWidth="200" MaxHeight="100" HorizontalAlignment="Left"/>
                     <Button x:Name="btnUpdateImgLogoArena" HorizontalAlignment="Right" VerticalAlignment="Center" 
                             Margin="10" Padding="5 0" Background="LightGray">
                         <StackPanel Orientation="Horizontal">
@@ -121,7 +138,8 @@
                 
                 <TextBlock Grid.Row="8" Grid.Column="1" Text="Photo" FontWeight="Bold" Margin="10 30" HorizontalAlignment="Right"/>
                 <Grid Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="2" Margin="10">
-                    <Image  x:Name="imgPhotoArena" Source="/Assets/nba_images/arenas/td_garden_photo.jpg" HorizontalAlignment="Left" />
+                    <Image  x:Name="imgPhotoArena" Source="/Assets/nba_images/arenas/td_garden_photo.jpg" 
+                            HorizontalAlignment="Left" MaxHeight="120"/>
                     <Button x:Name="btnUpdateImgPhotoArena" HorizontalAlignment="Right" VerticalAlignment="Top" 
                             Margin="10" Padding="5 0" Background="LightGray">
                         <StackPanel Orientation="Horizontal">
@@ -151,7 +169,7 @@
                 </Button>
             </Grid>
             <!-- Costat dret -->
-            <Grid Grid.Column="2">
+            <Grid Grid.Column="2" Margin="50 10 70 10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="*" />
@@ -166,7 +184,28 @@
                 <TextBox x:Name="txtLatMap" Grid.Row="0" Grid.Column="1" Margin="10"/>
                 <TextBox x:Name="txtLongMap" Grid.Row="0" Grid.Column="2" Margin="10"/>
                 <!-- MAP -->
+                <Maps:MapControl x:Name="mapArena" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="10"
+                                 Style="Terrain"  ZoomInteractionMode="GestureAndControl" 
+                                 MapServiceToken="JZ12XUmgKB0uKKUOILVo~_vE-M1g0j1BC5N4VMJhxwQ~Aq2Ip5kRYYqFubCVdPnYTZDmJNagRe0SoyH5VqC8NcwCJJA1w9f9cqkOyIu8iNhs"></Maps:MapControl>
                 <!-- PLAYERS -->
+                <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Background="#FF073763">
+                        <TextBlock Text="Players" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                   FontWeight="Bold" Foreground="White"/>
+                        <Button x:Name="btnAddPlayers" Background="LightGray" Margin="10"
+                                VerticalAlignment="Top" HorizontalAlignment="Right">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/Assets/icons/icons8-add-64.png" Width="30"/>
+                                <TextBlock Text="Add" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                    <ListView x:Name="lsvPlayers" Grid.Row="1" Background="LightGray"/>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>

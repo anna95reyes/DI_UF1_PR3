@@ -129,6 +129,9 @@
     <Compile Include="View\TeamEditorPage.xaml.cs">
       <DependentUpon>TeamEditorPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UIPlayer.xaml.cs">
+      <DependentUpon>UIPlayer.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -143,6 +146,7 @@
     <Content Include="Assets\icons\icons8-pen-squared-48.png" />
     <Content Include="Assets\icons\icons8-reduce-48.png" />
     <Content Include="Assets\icons\icons8-save-50.png" />
+    <Content Include="Assets\img.png" />
     <Content Include="Assets\NBA-logo.png" />
     <Content Include="Assets\nba_images\arenas\aaa_logo.jpg" />
     <Content Include="Assets\nba_images\arenas\aaa_photo.jpg" />
@@ -312,6 +316,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TeamEditorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UIPlayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
