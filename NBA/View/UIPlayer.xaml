@@ -7,23 +7,23 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Height="220"
-    Width="320">
+    Width="350">
 
-    <Grid>
+    <Grid Background="White">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="154"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid Grid.Column="0" Grid.Row="0" Margin="10 10 5 10">
-            <Image Source="/Assets/nba_images/wood_right.png" Stretch="UniformToFill"/>
-            <Image x:Name="imgPlayer" Source="/Assets/img.png" Height="100" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+            <Image Source="/Assets/nba_images/wood_right.png" MaxWidth="149"/>
+            <Image x:Name="imgPlayer" Height="100" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
         </Grid>
-        <TextBlock x:Name="txbNumber" Text="11" Grid.Column="1" Grid.Row="0" Margin="5 10" FontSize="30" FontWeight="Bold"/>
+        <TextBlock x:Name="txbNumber" Grid.Column="1" Grid.Row="0" Margin="5 10" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"/>
         <Grid Grid.Column="2" Grid.Row="0" BorderBrush="LightGray" BorderThickness="1 0 0 0" Margin="0 5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -35,12 +35,7 @@
             <TextBlock x:Name="txbLastName" Text="Turner" Margin="10 2" Grid.Row="1"/>
             <TextBlock x:Name="txbPosition" Text="Guard,Forward" Margin="10 2" Grid.Row="2"/>
             <Image x:Name="imgFlag" Grid.Row="3" Height="42" Margin="10 0"
-                   VerticalAlignment="Center" HorizontalAlignment="Left">
-                <Image.Source>
-                    <SvgImageSource UriSource="ms-appx:///Assets/nba_images/flags/us.svg"
-                                RasterizePixelHeight="480" RasterizePixelWidth="640" />
-                </Image.Source>
-            </Image>
+                   VerticalAlignment="Center" HorizontalAlignment="Left"></Image>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="1" Margin="10">
             <Grid.RowDefinitions>
@@ -50,23 +45,23 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock x:Name="txbWeight" Text="99.80"/>
+                <TextBlock x:Name="txbWeight"/>
                 <TextBlock Text="kg" Margin="3 0 0 0"/>
                 <TextBlock Text="/" Margin="3 0 0 0"/>
-                <TextBlock x:Name="txbHeight" Text="201" Margin="3 0 0 0"/>
+                <TextBlock x:Name="txbHeight" Margin="3 0 0 0"/>
                 <TextBlock Text="cm" Margin="3 0 0 0"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <TextBlock Text="Born: "/>
-                <TextBlock x:Name="txbBirthday" Text="27.10.1988" Margin="3 0 0 0"/>
+                <TextBlock x:Name="txbBirthday" Margin="3 0 0 0"/>
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <TextBlock Text="Exp: from" />
-                <TextBlock x:Name="txbStartYear" Text="2010" Margin="3 0 0 0"/>
+                <TextBlock x:Name="txbStartYear" Margin="3 0 0 0"/>
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Horizontal">
-                <TextBlock Text="Collage: " />
-                <TextBlock x:Name="txbCollage" Text="Ohio State" Margin="3 0 0 0"/>
+                <TextBlock x:Name="tbxTitleCollage" />
+                <TextBlock x:Name="txbCollage" Margin="3 0 0 0"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Column="2" Grid.Row="1">

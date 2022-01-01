@@ -8,6 +8,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:wctprimitives="using:Microsoft.Toolkit.Uwp.UI.Controls.Primitives"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Background="#FF073763">
@@ -45,20 +46,82 @@
                         <TextBlock Text="Clear filter" VerticalAlignment="Center" Margin="5 0 0 0"/>
                     </StackPanel>
                 </Button>
+                <!--<Image Grid.Row="1" Grid.ColumnSpan="3" Source="file:///C:/Users/anna9/AppData/Local/Packages/8d69f301-8a60-45e3-84de-df0173828c73_4sknn5rsd96h6/LocalState/nba_images/teams/ATL.svg"/>-->
                 <controls:DataGrid x:Name="dgrTeams" Grid.Row="1" Grid.ColumnSpan="3" Margin="10" MaxHeight="800"
                                    AutoGenerateColumns="False" CanUserSortColumns="False" IsReadOnly="True"
-                                   GridLinesVisibility="Vertical" AlternatingRowBackground="#FFE2E2E2">
+                                   GridLinesVisibility="None" AlternatingRowBackground="#FFF9F9F9" Background="White"
+                                   SelectionChanged="dgrTeams_SelectionChanged">
+                    
+                    
+                    
                     <controls:DataGrid.Columns>
                         
                         <controls:DataGridTemplateColumn Header="Logo">
                             <controls:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Source="{Binding TeamLogo}" Width="80"></Image>
+                                    <Image Width="133" Margin="10">
+                                        <Image.Source>
+                                            <SvgImageSource UriSource="{Binding TeamLogo}"
+                                            RasterizePixelHeight="400" RasterizePixelWidth="400" />
+                                        </Image.Source>
+                                    </Image>
                                 </DataTemplate>
                             </controls:DataGridTemplateColumn.CellTemplate>
+                            <controls:DataGridTemplateColumn.HeaderStyle>
+                                <Style TargetType="wctprimitives:DataGridColumnHeader">
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="FontSize" Value="20" />
+                                    <Setter Property="Foreground" Value="Black" />
+                                </Style>
+                            </controls:DataGridTemplateColumn.HeaderStyle>
                         </controls:DataGridTemplateColumn>
-                        
-                    </controls:DataGrid.Columns>                   
+
+                        <controls:DataGridTextColumn Header="Name" Binding="{Binding TeamCaption}" 
+                                                     Width="140" FontSize="16">
+                            <controls:DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="wctprimitives:DataGridColumnHeader">
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="FontSize" Value="20" />
+                                    <Setter Property="Foreground" Value="Black" />
+                                </Style>
+                            </controls:DataGridTextColumn.HeaderStyle>
+                            <controls:DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="TextWrapping" Value="Wrap"/>
+                                    <Setter Property="Foreground" Value="DodgerBlue"/>
+                                </Style>
+                            </controls:DataGridTextColumn.ElementStyle>
+                        </controls:DataGridTextColumn>
+
+                        <controls:DataGridTextColumn Header="Division" Binding="{Binding DivisionCaption}" 
+                                                     Width="140" FontSize="16">
+                            <controls:DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="wctprimitives:DataGridColumnHeader">
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="FontSize" Value="20" />
+                                    <Setter Property="Foreground" Value="Black" />
+                                </Style>
+                            </controls:DataGridTextColumn.HeaderStyle>
+                        </controls:DataGridTextColumn>
+
+                        <controls:DataGridTextColumn Header="Arena" Binding="{Binding ArenaCaption}" 
+                                                     Width="140" FontSize="16">
+                            <controls:DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="wctprimitives:DataGridColumnHeader">
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="FontSize" Value="20" />
+                                    <Setter Property="Foreground" Value="Black" />
+                                </Style>
+                            </controls:DataGridTextColumn.HeaderStyle>
+                            <controls:DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="TextWrapping" Value="Wrap"/>
+                                    <Setter Property="Foreground" Value="DodgerBlue"/>
+                                </Style>
+                            </controls:DataGridTextColumn.ElementStyle>
+                        </controls:DataGridTextColumn>
+
+                    </controls:DataGrid.Columns>
                 </controls:DataGrid>
             </Grid>
             <!-- Costat central -->
@@ -97,13 +160,9 @@
 
                 <TextBlock Grid.Row="3" Grid.Column="1" Text="Logo" FontWeight="Bold" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 <Grid Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Margin="10">
-                    <Image x:Name="imgLogoTeam" Grid.Row="3" Grid.Column="2" Margin="10" Height="100"
-                           HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Image.Source>
-                            <SvgImageSource UriSource="ms-appx:///Assets/nba_images/teams/BOS.svg"
-                                RasterizePixelHeight="400" RasterizePixelWidth="400" />
-                        </Image.Source>
-                    </Image>
+                    <Image x:Name="imgLogoTeam" Grid.Row="3" Grid.Column="2" Margin="10" Height="90"
+                           HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
                     <Button x:Name="btnUpdateImgLogoTeam" HorizontalAlignment="Right" VerticalAlignment="Center" 
                             Margin="10" Padding="5 0" Background="LightGray">
                         <StackPanel Orientation="Horizontal">
@@ -118,9 +177,8 @@
                 
                 <TextBlock Grid.Row="5" Grid.Column="1" Text="Logo" FontWeight="Bold" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
-                <Grid Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Margin="10" >
-                    <Image x:Name="imgLogoArena" Margin="10" Source="/Assets/nba_images/arenas/td_garden_logo.png" 
-                           MaxWidth="200" MaxHeight="100" HorizontalAlignment="Left"/>
+                <Grid Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Margin="10" Height="80">
+                    <Image x:Name="imgLogoArena" Margin="10" MaxWidth="200" MaxHeight="80" HorizontalAlignment="Left"/>
                     <Button x:Name="btnUpdateImgLogoArena" HorizontalAlignment="Right" VerticalAlignment="Center" 
                             Margin="10" Padding="5 0" Background="LightGray">
                         <StackPanel Orientation="Horizontal">
@@ -131,15 +189,14 @@
                 </Grid>
                 <TextBlock Grid.Row="6" Grid.Column="1" Text="About" FontWeight="Bold" Margin="10 30" HorizontalAlignment="Right"/>
                 <TextBox x:Name="txtAbout" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Margin="10"
-                         AcceptsReturn="True" TextWrapping="Wrap" Height="150"/>
+                         AcceptsReturn="True" TextWrapping="Wrap" Height="120"/>
 
                 <TextBlock Grid.Row="7" Grid.Column="1" Text="Capacity" FontWeight="Bold" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 <TextBox x:Name="txtCapacity" Grid.Row="7" Grid.Column="2" Margin="10" Width="100" HorizontalAlignment="Left" />
                 
                 <TextBlock Grid.Row="8" Grid.Column="1" Text="Photo" FontWeight="Bold" Margin="10 30" HorizontalAlignment="Right"/>
                 <Grid Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="2" Margin="10">
-                    <Image  x:Name="imgPhotoArena" Source="/Assets/nba_images/arenas/td_garden_photo.jpg" 
-                            HorizontalAlignment="Left" MaxHeight="120"/>
+                    <Image  x:Name="imgPhotoArena" HorizontalAlignment="Left" MaxHeight="120"/>
                     <Button x:Name="btnUpdateImgPhotoArena" HorizontalAlignment="Right" VerticalAlignment="Top" 
                             Margin="10" Padding="5 0" Background="LightGray">
                         <StackPanel Orientation="Horizontal">
@@ -204,7 +261,13 @@
                             </StackPanel>
                         </Button>
                     </Grid>
-                    <ListView x:Name="lsvPlayers" Grid.Row="1" Background="LightGray"/>
+                    <ListView x:Name="lsvPlayers" Grid.Row="1" Background="LightGray" MaxHeight="520">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:UIPlayer ElPlayer="{Binding}" HorizontalAlignment="Center" Margin="65 10 0 10"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </Grid>
             </Grid>
         </Grid>

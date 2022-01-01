@@ -44,9 +44,9 @@ namespace NBA
         {
             StorageFolder appInstalledFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
             StorageFolder assets = await appInstalledFolder.GetFolderAsync("Assets");
-            StorageFolder appDataFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+            StorageFolder appDataFolder = ApplicationData.Current.LocalFolder;
             IReadOnlyList<IStorageItem> files = await assets.GetItemsAsync();
-            
+
             for (int i = 0; i < files.Count; i++)
             {
                 copiarArxiusICarpetesAssets(files, i, appDataFolder);
