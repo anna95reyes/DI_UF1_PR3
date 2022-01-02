@@ -83,7 +83,7 @@ namespace NBA.View
                 stream.AsStreamForWrite().Write(playerPhoto, 0, playerPhoto.Length);
                 image.SetSource(stream);
             }
-            return image;
+            return image; 
         }
 
         private void generarImatgeSvg(Image img, String url, int height, int width)
