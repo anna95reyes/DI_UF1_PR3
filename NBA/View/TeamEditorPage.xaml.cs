@@ -110,7 +110,7 @@ namespace NBA.View
                 generarGeoPositionMapa(te.ArenaLat, te.ArenaLong);
                 lsvPlayers.ItemsSource = PlayerDB.GetLlistaPlayers(te.TeamId);
             }
-        }
+        } 
 
         private void generarImatgeSvg(Image img, String url, int height, int width)
         {
