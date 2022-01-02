@@ -118,6 +118,6 @@ namespace NBA.View
             sis.RasterizePixelHeight = height;
             sis.RasterizePixelWidth = width;
             img.Source = sis;
-        }
+        } 
     }
 }
