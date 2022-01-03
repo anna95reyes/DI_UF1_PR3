@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace NBA_BD.Model
 {
-    public class Division
+    public class Division : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private String caption;
 
         public Division(string caption)
@@ -13,7 +16,17 @@ namespace NBA_BD.Model
             Caption = caption;
         }
 
-        public string Caption { get => caption; set => caption = value; }
+        public string Caption {
+            get
+            {
+                return caption;
+            }
+            set
+            {
+                if (!validaCaption(value)) throw new Exception("La caption de Division es obligatoria");
+                caption = value;
+            }
+        }
 
         public override bool Equals(object obj)
         {
@@ -29,6 +42,11 @@ namespace NBA_BD.Model
         public override string ToString()
         {
             return Caption;
+        }
+
+        public static bool validaCaption(String caption)
+        {
+            return caption.Length > 0;
         }
     }
 }

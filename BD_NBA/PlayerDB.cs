@@ -24,7 +24,7 @@ namespace NBA_BD
                     connection.Open();
                     using (DbCommand consulta = connection.CreateCommand())
                     {
-                        DBUtil.crearParametre(consulta, "@team_id", teamId, DbType.Int32);
+                        DBUtil.crearParametre(consulta, "@param_team_id", teamId, DbType.Int32);
 
                         consulta.CommandText = @"select p.current_number as player_current_number, 
 	                                                    p.first_name as player_first_name,
@@ -41,7 +41,7 @@ namespace NBA_BD
                                                  from player p join team t on p.current_team_id = t.id
 			                                                  left join college c on p.college_id = c.id
                                                               join country co on p.country_id = co.id
-                                                 where t.id = @team_id";
+                                                 where t.id = @param_team_id";
 
                         DbDataReader reader = consulta.ExecuteReader(); //per cuan pot retorna mes d'una fila
 

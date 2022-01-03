@@ -9,7 +9,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:wctprimitives="using:Microsoft.Toolkit.Uwp.UI.Controls.Primitives"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="Page_Loaded">
 
     <Grid Background="#FF073763">
         <Grid.RowDefinitions>
@@ -36,11 +37,11 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <ComboBox x:Name="cbxFilterDivision" Grid.Row="0" Grid.Column="0" Margin="10"
-                          VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                          VerticalAlignment="Center" HorizontalAlignment="Stretch" SelectionChanged="cbxFilterDivision_SelectionChanged"/>
                 <TextBox x:Name="txtFilterName" Grid.Row="0" Grid.Column="1" Margin="20 10" PlaceholderText="Enter name to filter"
-                         VerticalAlignment="Center"/>
+                         VerticalAlignment="Center" TextChanged="txtFilterName_TextChanged"/>
                 <Button x:Name="btnClearFilter" Grid.Row="0" Grid.Column="2" Margin="10"
-                        VerticalAlignment="Center" HorizontalAlignment="Center">
+                        VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnClearFilter_Click">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Assets/icons/icons8-clear-filter-50.png" Width="30"/>
                         <TextBlock Text="Clear filter" VerticalAlignment="Center" Margin="5 0 0 0"/>
@@ -152,11 +153,11 @@
                 </Button>
 
                 <TextBlock Grid.Row="1" Grid.Column="1" Text="Name" FontWeight="Bold" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtNameTeam" Grid.Row="1" Grid.Column="2" Margin="10"/>
-                <TextBox x:Name="txtShortNameTeam" Grid.Row="1" Grid.Column="3" Margin="10"/>
+                <TextBox x:Name="txtNameTeam" Grid.Row="1" Grid.Column="2" Margin="10" TextChanged="txtNameTeam_TextChanged"/>
+                <TextBox x:Name="txtShortNameTeam" Grid.Row="1" Grid.Column="3" Margin="10" TextChanged="txtShortNameTeam_TextChanged"/>
 
                 <TextBlock Grid.Row="2" Grid.Column="1" Text="Division" FontWeight="Bold" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                <ComboBox x:Name="cbxDivision" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="10" HorizontalAlignment="Stretch"/>
+                <ComboBox x:Name="cbxDivision" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="10" HorizontalAlignment="Stretch" SelectionChanged="cbxDivision_SelectionChanged"/>
 
                 <TextBlock Grid.Row="3" Grid.Column="1" Text="Logo" FontWeight="Bold" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 <Grid Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Margin="10">
@@ -164,41 +165,41 @@
                            HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
                     <Button x:Name="btnUpdateImgLogoTeam" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                            Margin="10" Padding="5 0" Background="LightGray">
+                            Margin="10" Padding="5 0" Background="LightGray" Click="btnUpdateImgLogoTeam_Click">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="/Assets/icons/icons8-save-50.png" Width="30"/>
+                            <Image Source="/Assets/icons/icons8-save-50.png"/>
                             <TextBlock Text="Upload" VerticalAlignment="Center" Margin="5 0 0 0"/>
                         </StackPanel>
                     </Button>
                 </Grid>
 
                 <TextBlock Grid.Row="4" Grid.Column="1" Text="Arena" FontWeight="Bold" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtArena" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Margin="10"/>
+                <TextBox x:Name="txtArena" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Margin="10" TextChanged="txtArena_TextChanged"/>
                 
                 <TextBlock Grid.Row="5" Grid.Column="1" Text="Logo" FontWeight="Bold" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
                 <Grid Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Margin="10" Height="80">
                     <Image x:Name="imgLogoArena" Margin="10" MaxWidth="200" MaxHeight="80" HorizontalAlignment="Left"/>
                     <Button x:Name="btnUpdateImgLogoArena" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                            Margin="10" Padding="5 0" Background="LightGray">
+                            Margin="10" Padding="5 0" Background="LightGray" Click="btnUpdateImgLogoArena_Click">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="/Assets/icons/icons8-save-50.png" Width="30"/>
+                            <Image Source="/Assets/icons/icons8-save-50.png"/>
                             <TextBlock Text="Upload" VerticalAlignment="Center" Margin="5 0 0 0"/>
                         </StackPanel>
                     </Button>
                 </Grid>
                 <TextBlock Grid.Row="6" Grid.Column="1" Text="About" FontWeight="Bold" Margin="10 30" HorizontalAlignment="Right"/>
                 <TextBox x:Name="txtAbout" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Margin="10"
-                         AcceptsReturn="True" TextWrapping="Wrap" Height="120"/>
+                         AcceptsReturn="True" TextWrapping="Wrap" Height="120" TextChanged="txtAbout_TextChanged"/>
 
                 <TextBlock Grid.Row="7" Grid.Column="1" Text="Capacity" FontWeight="Bold" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtCapacity" Grid.Row="7" Grid.Column="2" Margin="10" Width="100" HorizontalAlignment="Left" />
+                <TextBox x:Name="txtCapacity" Grid.Row="7" Grid.Column="2" Margin="10" Width="100" HorizontalAlignment="Left" TextChanged="txtCapacity_TextChanged"/>
                 
                 <TextBlock Grid.Row="8" Grid.Column="1" Text="Photo" FontWeight="Bold" Margin="10 30" HorizontalAlignment="Right"/>
                 <Grid Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="2" Margin="10">
                     <Image  x:Name="imgPhotoArena" HorizontalAlignment="Left" MaxHeight="120"/>
                     <Button x:Name="btnUpdateImgPhotoArena" HorizontalAlignment="Right" VerticalAlignment="Top" 
-                            Margin="10" Padding="5 0" Background="LightGray">
+                            Margin="10" Padding="5 0" Background="LightGray" Click="btnUpdateImgPhotoArena_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Assets/icons/icons8-save-50.png" Width="30"/>
                             <TextBlock Text="Upload" VerticalAlignment="Center" Margin="5 0 0 0"/>
@@ -238,8 +239,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="LAT/LONG" FontWeight="Bold" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtLatMap" Grid.Row="0" Grid.Column="1" Margin="10"/>
-                <TextBox x:Name="txtLongMap" Grid.Row="0" Grid.Column="2" Margin="10"/>
+                <TextBox x:Name="txtLatMap" Grid.Row="0" Grid.Column="1" Margin="10" TextChanged="txtLatMap_TextChanged"/>
+                <TextBox x:Name="txtLongMap" Grid.Row="0" Grid.Column="2" Margin="10" TextChanged="txtLongMap_TextChanged"/>
                 <!-- MAP -->
                 <Maps:MapControl x:Name="mapArena" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="10"
                                  Style="Terrain"  ZoomInteractionMode="GestureAndControl" 

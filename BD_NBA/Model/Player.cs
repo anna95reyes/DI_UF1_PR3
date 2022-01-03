@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace NBA_BD.Model
 {
-    public class Player
+    public class Player : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         int playerCurrentNumber;
         String playerFirstName;
         String playerLastName;
@@ -35,17 +39,125 @@ namespace NBA_BD.Model
             PlayerPosition = playerPosition;
         }
 
-        public int PlayerCurrentNumber { get => playerCurrentNumber; set => playerCurrentNumber = value; }
-        public string PlayerFirstName { get => playerFirstName; set => playerFirstName = value; }
-        public string PlayerLastName { get => playerLastName; set => playerLastName = value; }
-        public byte[] PlayerPhoto { get => playerPhoto; set => playerPhoto = value; }
-        public string CollageName { get => collageName; set => collageName = value; }
-        public int PlayerCareerStartYear { get => playerCareerStartYear; set => playerCareerStartYear = value; }
-        public string CountryName { get => countryName; set => countryName = value; }
-        public string CountryShortName { get => countryShortName; set => countryShortName = value; }
-        public int PlayerHeight { get => playerHeight; set => playerHeight = value; }
-        public float PlayerWeight { get => playerWeight; set => playerWeight = value; }
-        public DateTime PlayerBithday { get => playerBithday; set => playerBithday = value; }
-        public String PlayerPosition { get => playerPosition; set => playerPosition = value; }
+        public int PlayerCurrentNumber {
+            get
+            {
+                return playerCurrentNumber;
+            }
+            set
+            {
+                playerCurrentNumber = value;
+            }
+        }
+        public string PlayerFirstName {
+            get
+            {
+                return playerFirstName;
+            }
+            set
+            {
+                playerFirstName = value;
+            }
+        }
+        public string PlayerLastName { 
+            get
+            {
+                return playerLastName;
+            }
+            set
+            {
+                playerLastName = value;
+            } 
+        }
+        public byte[] PlayerPhoto { 
+            get
+            {
+                return playerPhoto;
+            }
+            set
+            {
+                playerPhoto = value;
+            } 
+        }
+        public string CollageName { 
+            get
+            {
+                return collageName;
+            }
+            set
+            {
+                collageName = value;
+            } 
+        }
+        public int PlayerCareerStartYear { 
+            get
+            {
+                return playerCareerStartYear;
+            }
+            set
+            {
+                playerCareerStartYear = value;
+            } 
+        }
+        public string CountryName { 
+            get
+            {
+                return countryName;
+            }
+            set
+            {
+                countryName = value;
+            } 
+        }
+        public string CountryShortName { 
+            get
+            {
+                return countryShortName;
+            }
+            set
+            {
+                countryShortName = value;
+            } 
+        }
+        public int PlayerHeight { 
+            get
+            {
+                return playerHeight;
+            }
+            set
+            {
+                playerHeight = value;
+            } 
+        }
+        public float PlayerWeight { 
+            get
+            {
+                return playerWeight;
+            }
+            set
+            {
+                playerWeight = value;
+            } 
+        }
+        public DateTime PlayerBithday { 
+            get
+            {
+                return playerBithday;
+            }
+            set
+            {
+                playerBithday = value;
+            } 
+        }
+        public String PlayerPosition { 
+            get
+            {
+                return playerPosition;
+            }
+            set
+            {
+                playerPosition = value;
+            } 
+        }
     }
 }
