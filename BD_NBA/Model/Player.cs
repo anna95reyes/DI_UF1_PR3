@@ -10,33 +10,44 @@ namespace NBA_BD.Model
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        int playerId;
         int playerCurrentNumber;
         String playerFirstName;
         String playerLastName;
         Byte[] playerPhoto;
-        String collageName;
+        College collageName;
         int playerCareerStartYear;
-        String countryName;
-        String countryShortName;
+        Country country;
         int playerHeight;
         float playerWeight;
         DateTime playerBithday;
         String playerPosition;
 
-        public Player(int playerCurrentNumber, string playerFirstName, string playerLastName, byte[] playerPhoto, string collageName, int playerCareerStartYear, string countryName, string countryShortName, int playerHeight, float playerWeight, DateTime playerBithday, String playerPosition)
+        public Player(int playerId, int playerCurrentNumber, string playerFirstName, string playerLastName, byte[] playerPhoto, College collageName, int playerCareerStartYear, Country country, int playerHeight, float playerWeight, DateTime playerBithday, String playerPosition)
         {
+            PlayerId = playerId;
             PlayerCurrentNumber = playerCurrentNumber;
             PlayerFirstName = playerFirstName;
             PlayerLastName = playerLastName;
             PlayerPhoto = playerPhoto;
             CollageName = collageName;
             PlayerCareerStartYear = playerCareerStartYear;
-            CountryName = countryName;
-            CountryShortName = countryShortName;
+            Country = country;
             PlayerHeight = playerHeight;
             PlayerWeight = playerWeight;
             PlayerBithday = playerBithday;
             PlayerPosition = playerPosition;
+        }
+
+        public int PlayerId {
+            get
+            {
+                return playerId;
+            }
+            set
+            {
+                playerId = value;
+            }
         }
 
         public int PlayerCurrentNumber {
@@ -79,7 +90,7 @@ namespace NBA_BD.Model
                 playerPhoto = value;
             } 
         }
-        public string CollageName { 
+        public College CollageName { 
             get
             {
                 return collageName;
@@ -99,26 +110,17 @@ namespace NBA_BD.Model
                 playerCareerStartYear = value;
             } 
         }
-        public string CountryName { 
+        public Country Country { 
             get
             {
-                return countryName;
+                return country;
             }
             set
             {
-                countryName = value;
+                country = value;
             } 
         }
-        public string CountryShortName { 
-            get
-            {
-                return countryShortName;
-            }
-            set
-            {
-                countryShortName = value;
-            } 
-        }
+        
         public int PlayerHeight { 
             get
             {
@@ -159,5 +161,6 @@ namespace NBA_BD.Model
                 playerPosition = value;
             } 
         }
+
     }
 }

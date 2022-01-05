@@ -69,7 +69,7 @@ namespace NBA
             }
             else if (files[index].IsOfType(StorageItemTypes.File))
             {
-                ((StorageFile)files[index]).CopyAsync(appDataFolder);
+                await ((StorageFile)files[index]).CopyAsync(appDataFolder, files[index].Name, NameCollisionOption.GenerateUniqueName);
             }
         }
 

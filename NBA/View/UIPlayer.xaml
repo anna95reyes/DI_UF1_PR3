@@ -69,10 +69,12 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnDeletePlayer" Grid.Column="0" Margin="5" Padding="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="Transparent">
+            <Button x:Name="btnDeletePlayer" Grid.Column="0" Margin="5" Padding="0" VerticalAlignment="Bottom" 
+                    HorizontalAlignment="Left" Background="Transparent" Click="btnDeletePlayer_Click">
                 <Image Source="/Assets/icons/icons8-reduce-48.png" Width="25"/>
             </Button>
-            <Button x:Name="btnEditPlayer" Grid.Column="1" Margin="5" Padding="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="Transparent">
+            <Button x:Name="btnEditPlayer" Grid.Column="1" Margin="5" Padding="0" VerticalAlignment="Bottom" 
+                    HorizontalAlignment="Right" Background="Transparent" Click="btnEditPlayer_Click">
                 <Image Source="/Assets/icons/icons8-pen-squared-48.png" Width="25"/>
             </Button>
         </Grid>

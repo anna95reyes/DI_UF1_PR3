@@ -26,7 +26,8 @@ namespace NBA_BD
                     {
                         DBUtil.crearParametre(consulta, "@param_team_id", teamId, DbType.Int32);
 
-                        consulta.CommandText = @"select p.current_number as player_current_number, 
+                        consulta.CommandText = @"select p.id as player_id,
+                                                        p.current_number as player_current_number, 
 	                                                    p.first_name as player_first_name,
                                                         p.last_name as player_last_name,
                                                         p.photo as player_photo,
@@ -46,9 +47,10 @@ namespace NBA_BD
                         DbDataReader reader = consulta.ExecuteReader(); //per cuan pot retorna mes d'una fila
 
                         Dictionary<string, int> ordinals = new Dictionary<string, int>();
-                        string[] cols = { "player_current_number", "player_first_name", "player_last_name", "player_photo",
-                                          "collage_name", "player_cureer_start_year", "country_name", "country_short_name",
-                                          "player_height", "player_weight", "player_bithday", "player_position"};
+                        string[] cols = { "player_id","player_current_number", "player_first_name", "player_last_name", 
+                                          "player_photo", "collage_name", "player_cureer_start_year", "country_name", 
+                                          "country_short_name", "player_height", "player_weight", "player_bithday", 
+                                          "player_position"};
                         foreach (string c in cols)
                         {
                             ordinals[c] = reader.GetOrdinal(c);
@@ -56,6 +58,7 @@ namespace NBA_BD
 
                         while (reader.Read()) //llegeix la fila seguent, retorna true si ha pogut llegir la fila, retorna false si no hi ha mes dades per lleguir
                         {
+                            int player_id = reader.GetInt32(ordinals["player_id"]);
                             int player_current_number = reader.GetInt32(ordinals["player_current_number"]);
                             String player_first_name = reader.GetString(ordinals["player_first_name"]);
                             String player_last_name = reader.GetString(ordinals["player_last_name"]);
@@ -71,8 +74,8 @@ namespace NBA_BD
 
 
 
-                            Player p = new Player(player_current_number,player_first_name, player_last_name, player_photo, 
-                                                  collage_name, player_cureer_start_year, country_name, country_short_name,
+                            Player p = new Player(player_id, player_current_number,player_first_name, player_last_name, player_photo, 
+                                                  new College(collage_name), player_cureer_start_year, new Country (country_name, country_short_name),
                                                   player_height, player_weight, player_bithday, player_position);
                             players.Add(p);
                         }
@@ -80,6 +83,47 @@ namespace NBA_BD
                 }
             }
             return players;
+        }
+
+        public static bool delete(int playerId)
+        {
+            using (MySqlDBContext context = new MySqlDBContext()) //crea el contexte de la base de dades
+            {
+                bool haAnatBe = true;
+
+                using (DbConnection connection = context.Database.GetDbConnection()) //pren la conexxio de la BD
+                {
+                    connection.Open();
+                    DbTransaction transaccio = connection.BeginTransaction(); //Creacio d'una transaccio
+
+                    using (DbCommand consulta = connection.CreateCommand())
+                    {
+                        consulta.Transaction = transaccio; // marques la consulta dins de la transacció
+
+
+                        DBUtil.crearParametre(consulta, "@player_id", playerId, DbType.Int32);
+                        consulta.CommandText = "select count(1) from player where id = @player_id";
+                        long numEmpleats = (long)consulta.ExecuteScalar();
+
+                        if (numEmpleats != 1) return false;
+
+                        consulta.CommandText = "delete from player where id = @player_id";
+
+                        int numDeleted = consulta.ExecuteNonQuery();
+
+                        if (numDeleted != 1)
+                        {
+                            transaccio.Rollback();
+                            haAnatBe = false;
+                        }
+                        transaccio.Commit();
+                        return haAnatBe;
+
+                    }
+
+                }
+
+            }
         }
 
         private static string readerStringOrNull(DbDataReader reader, int ordinal, String valorPerDefecte)

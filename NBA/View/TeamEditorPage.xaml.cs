@@ -74,14 +74,14 @@ namespace NBA.View
             {
                 btnClearFilter.IsEnabled = false;
                 btnDeleteTeam.IsEnabled = false;
-                btnCancelTeam.IsEnabled = true;
+                btnCancelTeam.IsEnabled = false;
                 btnSaveTeam.IsEnabled = false;
             }
             else if (estat == Estat.ALTA)
             {
                 btnClearFilter.IsEnabled = false;
                 btnDeleteTeam.IsEnabled = false;
-                btnCancelTeam.IsEnabled = true;
+                btnCancelTeam.IsEnabled = false;
                 btnSaveTeam.IsEnabled = false;
             }
         }
@@ -207,25 +207,38 @@ namespace NBA.View
 
         private void txtLatMap_TextChanged(object sender, TextChangedEventArgs e)
         {
+            canviEstat(Estat.MODIFICACIO);
+            validarDadesFormulari();
             cambiarCordenadesMapa();
         }
 
         private void txtLongMap_TextChanged(object sender, TextChangedEventArgs e)
         {
+            canviEstat(Estat.MODIFICACIO);
+            validarDadesFormulari();
             cambiarCordenadesMapa();
         }
 
         private void cambiarCordenadesMapa()
         {
-            double lat = 0;
-            double lng = 0;
+            double lat = -200;
+            double lng = -200;
+
             if (txtLatMap.Text != "" && txtLongMap.Text != "")
             {
-                lat = Double.Parse(txtLatMap.Text);
-                lng = Double.Parse(txtLongMap.Text);
+                lat = campDoubleValid(lat, txtLatMap);
+                lng = campDoubleValid(lng, txtLongMap);
+            } 
+            else
+            {
+                if (txtLatMap.Text == "") campTextBoxValid(false, txtLatMap);
+                if (txtLongMap.Text == "") campTextBoxValid(false, txtLongMap);
             }
 
-            generarGeoPositionMapa(lat, lng);
+            if (Team.validaLatitud(lat) && Team.validaLatitud(lng)) {
+                generarGeoPositionMapa(lat, lng);
+            }
+            
         }
 
         private async void btnUpdateImgLogoTeam_Click(object sender, RoutedEventArgs e)
@@ -250,6 +263,7 @@ namespace NBA.View
                 // ..... YOUR CODE HERE ...........
                 generarImatgeSvg(imgLogoTeam, copiedFile.Path, 400, 400);
 
+                canviEstat(Estat.MODIFICACIO);
                 validarDadesFormulari();
             }
         }
@@ -277,6 +291,7 @@ namespace NBA.View
                 // ..... YOUR CODE HERE ...........
                 imgLogoArena.Source = tmpBitmap;
 
+                canviEstat(Estat.MODIFICACIO);
                 validarDadesFormulari();
             }
         }
@@ -304,6 +319,7 @@ namespace NBA.View
                 // ..... YOUR CODE HERE ...........
                 imgPhotoArena.Source = tmpBitmap;
 
+                canviEstat(Estat.MODIFICACIO);
                 validarDadesFormulari();
             }   
         }
@@ -312,53 +328,117 @@ namespace NBA.View
         {
             if (formulariValid())
             {
+                bool hiHaCanvis = false;
 
+                if (dgrTeams.SelectedItem != null)
+                {
+                    Team teamEditat = (Team)dgrTeams.SelectedItem;
+                    hiHaCanvis = !(teamEditat.TeamCaption.Equals(txtNameTeam.Text) &&
+                                   teamEditat.TeamShortCaption.Equals(txtShortNameTeam.Text) && 
+                                   teamEditat.DivisionCaption.Equals((Division)cbxDivision.SelectedItem) &&
+                                   teamEditat.TeamLogo.Equals(((SvgImageSource)imgLogoTeam.Source).UriSource.AbsoluteUri) &&
+                                   teamEditat.ArenaCaption.Equals(txtArena.Text) &&
+                                   teamEditat.ArenaLogo.Equals(((BitmapImage)imgLogoArena.Source).UriSource.AbsoluteUri) &&
+                                   teamEditat.ArenaAbout.Equals(txtAbout.Text) &&
+                                   teamEditat.ArenaCapacity.Equals(Int32.Parse(txtCapacity.Text)) &&
+                                   teamEditat.ArenaPhoto.Equals(((BitmapImage)imgPhotoArena.Source).UriSource.AbsoluteUri) &&
+                                   teamEditat.ArenaLat.Equals(Double.Parse(txtLatMap.Text)) &&
+                                   teamEditat.ArenaLong.Equals(Double.Parse(txtLongMap.Text)) &&
+                                   lsvPlayers.Items.Equals(PlayerDB.GetLlistaPlayers(teamEditat.TeamId)));
+                }
+                if (estat == Estat.MODIFICACIO && hiHaCanvis || estat == Estat.ALTA)
+                {
+                    btnCancelTeam.IsEnabled = true;
+                    btnSaveTeam.IsEnabled = true;
+                }
+            }
+            else
+            {
+                btnCancelTeam.IsEnabled = true;
+                btnSaveTeam.IsEnabled = false;
             }
         }
 
         private bool formulariValid()
         {
             bool formulariValid = false;
+            int capacity = -1;
+            double lat = 0;
+            double lng = 0;
 
-            if (campTextBoxValid(Team.validaText(txtNameTeam.Text), txtNameTeam) &&
-                campTextBoxValid(Team.validaShortCaption(txtShortNameTeam.Text), txtShortNameTeam) &&
-                imgLogoTeam.Source != null &&
-                campTextBoxValid(Team.validaText(txtArena.Text), txtArena) &&
-                imgLogoArena.Source != null &&
-                campTextBoxValid(Team.validaText(txtAbout.Text), txtAbout) &&
-                campTextBoxValid(Team.validaCapacity(Int32.Parse(txtCapacity.Text)), txtCapacity) &&
-                imgPhotoArena.Source != null &&
-                campTextBoxValid(Team.validaLatitud(Double.Parse(txtLatMap.Text)), txtLatMap) &&
-                campTextBoxValid(Team.validaLongitud(Double.Parse(txtLongMap.Text)), txtLongMap)
+            campTextBoxValid(Team.validaText(txtNameTeam.Text), txtNameTeam);
+            campTextBoxValid(Team.validaShortCaption(txtShortNameTeam.Text), txtShortNameTeam);
+            campTextBoxValid(Team.validaText(txtArena.Text), txtArena);
+            campTextBoxValid(Team.validaText(txtAbout.Text), txtAbout);
+            capacity = campIntegerValid(capacity, txtCapacity);
+            lat = campDoubleValid(lat, txtLatMap);
+            lng = campDoubleValid(lng, txtLongMap);
+
+            if (Team.validaText(txtNameTeam.Text) && Team.validaShortCaption(txtShortNameTeam.Text) &&
+                imgLogoTeam.Source != null && Team.validaText(txtArena.Text) &&
+                imgLogoArena.Source != null && Team.validaText(txtAbout.Text) &&
+                Team.validaCapacity(capacity) && imgPhotoArena.Source != null &&
+                Team.validaLatitud(lat) && Team.validaLongitud(lng)
                 )
             {
                 formulariValid = true;
             }
-
             return formulariValid;
         }
 
-        private bool campTextBoxValid(bool validacio, TextBox camp)
+        private int campIntegerValid(int valor, TextBox camp)
+        {
+            try
+            {
+                valor = Int32.Parse(camp.Text);
+                campTextBoxValid(true, camp);
+
+            }
+            catch (Exception e)
+            {
+                campTextBoxValid(false, camp);
+            }
+
+            return valor;
+        }
+
+        private double campDoubleValid(double valor, TextBox camp)
+        {
+            try
+            {
+                valor = Double.Parse(camp.Text);
+                campTextBoxValid(true, camp);
+
+            }
+            catch (Exception e)
+            {
+                campTextBoxValid(false, camp);
+            }
+
+            return valor;
+        }
+
+        private void campTextBoxValid(bool validacio, TextBox camp)
         {
             if (validacio)
             {
                 camp.Background = new SolidColorBrush(Colors.Transparent);
-                validacio = true;
             }
             else
             {
-                camp.Background = new SolidColorBrush(Colors.DarkRed);
+                camp.Background = new SolidColorBrush(Color.FromArgb(100,234,153,153));
             }
-            return validacio;
         }
 
         private void txtNameTeam_TextChanged(object sender, TextChangedEventArgs e)
         {
+            canviEstat(Estat.MODIFICACIO);
             validarDadesFormulari();
         }
 
         private void txtShortNameTeam_TextChanged(object sender, TextChangedEventArgs e)
         {
+            canviEstat(Estat.MODIFICACIO);
             validarDadesFormulari();
         }
 
@@ -366,23 +446,60 @@ namespace NBA.View
         {
             if (cbxDivision.SelectedItem != null)
             {
+                canviEstat(Estat.MODIFICACIO);
                 validarDadesFormulari();
             }
         }
 
         private void txtArena_TextChanged(object sender, TextChangedEventArgs e)
         {
+            canviEstat(Estat.MODIFICACIO);
             validarDadesFormulari();
         }
 
         private void txtAbout_TextChanged(object sender, TextChangedEventArgs e)
         {
+            canviEstat(Estat.MODIFICACIO);
             validarDadesFormulari();
         }
 
         private void txtCapacity_TextChanged(object sender, TextChangedEventArgs e)
         {
+            canviEstat(Estat.MODIFICACIO);
             validarDadesFormulari();
         }
+
+        private void Player_Eliminat(object sender, EventArgs e)
+        {
+            if (dgrTeams.SelectedItem != null && lsvPlayers.ItemsSource != null)
+            {
+                Team te = (Team)dgrTeams.SelectedItem;
+                Player pl = (Player)lsvPlayers.ItemsSource;
+                lsvPlayers.ItemsSource = PlayerDB.GetLlistaPlayers(te.TeamId);
+            }
+        }
+
+        private void btnSaveTeam_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgrTeams.SelectedItem != null)
+            {
+                Team te = (Team)dgrTeams.SelectedItem;
+                if (!lsvPlayers.Items.Equals(PlayerDB.GetLlistaPlayers(te.TeamId)))
+                {
+                    lsvPlayers.ItemsSource = PlayerDB.GetLlistaPlayers(te.TeamId);
+                }
+            }
+        }
+
+
+        private async void btnAddPlayers_Click(object sender, RoutedEventArgs e)
+        {
+            ContentDialog cpd = new ContentPlayerDialog {
+                ElPlayer = null
+            };
+            ContentDialogResult result = await cpd.ShowAsync();
+        }
+
+
     }
 }

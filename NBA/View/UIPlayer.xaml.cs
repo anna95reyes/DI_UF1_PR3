@@ -1,4 +1,5 @@
-﻿using NBA_BD.Model;
+﻿using NBA_BD;
+using NBA_BD.Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -66,7 +67,7 @@ namespace NBA.View
                     if (ElPlayer.CollageName != null)
                     {
                         tbxTitleCollage.Text = "Collage: ";
-                        txbCollage.Text = ElPlayer.CollageName;
+                        txbCollage.Text = ElPlayer.CollageName.ToString();
                     }
                     else
                     {
@@ -76,7 +77,7 @@ namespace NBA.View
                     txbFirstName.Text = ElPlayer.PlayerFirstName;
                     txbLastName.Text = ElPlayer.PlayerLastName;
                     txbPosition.Text = ElPlayer.PlayerPosition;
-                    generarImatgeSvg(imgFlag, rutaImgFlagsAppData(ElPlayer.CountryShortName), 480, 640);
+                    generarImatgeSvg(imgFlag, rutaImgFlagsAppData(ElPlayer.Country.ShortName), 480, 640);
                 }
             }
         }
@@ -115,15 +116,40 @@ namespace NBA.View
 
         private String rutaImgFlagsAppData(string img)
         {
-            //ms-appx:///Assets/nba_images/flags/us.svg
-
             Uri uri = new Uri(Path.Combine(appDataFolder.Path, "nba_images"));
             uri = new Uri(Path.Combine(uri.AbsoluteUri, "flags"));
             uri = new Uri(Path.Combine(uri.AbsoluteUri, img + ".svg"));
 
-            Debug.WriteLine(uri.AbsoluteUri);
-
             return uri.AbsoluteUri;
+        }
+
+        private void btnDeletePlayer_Click(object sender, RoutedEventArgs e)
+        {
+            DisplayDeletePlayerDialog();
+        }
+
+        private void btnEditPlayer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private async void DisplayDeletePlayerDialog()
+        {
+            ContentDialog deleteFileDialog = new ContentDialog
+            {
+                Title = "Delete player permanently?",
+                Content = "If you delete this player, you won't be able to recover it. Do you want to delete it?",
+                PrimaryButtonText = "Delete",
+                CloseButtonText = "Cancel"
+            };
+
+            ContentDialogResult result = await deleteFileDialog.ShowAsync();
+
+            
+            if (result == ContentDialogResult.Primary)
+            {
+                PlayerDB.delete(ElPlayer.PlayerId);
+            }
         }
     }
 }
