@@ -38,7 +38,7 @@ namespace NBA_BD
                                                         p.height as player_height,
                                                         p.weight as player_weight, 
                                                         p.birthday as player_bithday,
-                                                        p.position as player_position
+                                                        p.position+1-1 as player_position
                                                  from player p join team t on p.current_team_id = t.id
 			                                                  left join college c on p.college_id = c.id
                                                               join country co on p.country_id = co.id
@@ -70,11 +70,11 @@ namespace NBA_BD
                             int player_height = reader.GetInt32(ordinals["player_height"]);
                             float player_weight = reader.GetFloat(ordinals["player_weight"]);
                             DateTime player_bithday = reader.GetDateTime(ordinals["player_bithday"]);
-                            String player_position = reader.GetString(ordinals["player_position"]);
+                            int player_position = reader.GetInt32(ordinals["player_position"]);
 
 
 
-                            Player p = new Player(player_id, player_current_number,player_first_name, player_last_name, player_photo, 
+                            Player p = new Player(teamId, player_id, player_current_number,player_first_name, player_last_name, player_photo, 
                                                   new College(collage_name), player_cureer_start_year, new Country (country_name, country_short_name),
                                                   player_height, player_weight, player_bithday, player_position);
                             players.Add(p);
@@ -134,6 +134,11 @@ namespace NBA_BD
                 value = reader.GetString(ordinal);
             }
             return value;
+        }
+
+        public static void insert(Player p)
+        {
+            //TODO: fer l'insert
         }
     }
 }

@@ -43,7 +43,7 @@
                 <Button x:Name="btnClearFilter" Grid.Row="0" Grid.Column="2" Margin="10"
                         VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnClearFilter_Click">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="/Assets/icons/icons8-clear-filter-50.png" Width="30"/>
+                        <Image Source="/Assets/icons/icons8-clear-filter-50.png" Height="30"/>
                         <TextBlock Text="Clear filter" VerticalAlignment="Center" Margin="5 0 0 0"/>
                     </StackPanel>
                 </Button>
@@ -147,7 +147,7 @@
                 </Grid.RowDefinitions>
                 <Button x:Name="btnAddTeam" Grid.Row="0" Grid.Column="0" Margin="10">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="/Assets/icons/icons8-add-64.png" Width="30"/>
+                        <Image Source="/Assets/icons/icons8-add-64.png" Height="30"/>
                         <TextBlock Text="Add" VerticalAlignment="Center" Margin="5 0 0 0"/>
                     </StackPanel>
                 </Button>
@@ -167,7 +167,7 @@
                     <Button x:Name="btnUpdateImgLogoTeam" HorizontalAlignment="Right" VerticalAlignment="Center" 
                             Margin="10" Padding="5 0" Background="LightGray" Click="btnUpdateImgLogoTeam_Click">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="/Assets/icons/icons8-save-50.png" Width="30"/>
+                            <Image Source="/Assets/icons/icons8-save-50.png" Height="30"/>
                             <TextBlock Text="Upload" VerticalAlignment="Center" Margin="5 0 0 0"/>
                         </StackPanel>
                     </Button>
@@ -183,7 +183,7 @@
                     <Button x:Name="btnUpdateImgLogoArena" HorizontalAlignment="Right" VerticalAlignment="Center" 
                             Margin="10" Padding="5 0" Background="LightGray" Click="btnUpdateImgLogoArena_Click">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="/Assets/icons/icons8-save-50.png" Width="30"/>
+                            <Image Source="/Assets/icons/icons8-save-50.png" Height="30"/>
                             <TextBlock Text="Upload" VerticalAlignment="Center" Margin="5 0 0 0"/>
                         </StackPanel>
                     </Button>
@@ -201,7 +201,7 @@
                     <Button x:Name="btnUpdateImgPhotoArena" HorizontalAlignment="Right" VerticalAlignment="Top" 
                             Margin="10" Padding="5 0" Background="LightGray" Click="btnUpdateImgPhotoArena_Click">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="/Assets/icons/icons8-save-50.png" Width="30"/>
+                            <Image Source="/Assets/icons/icons8-save-50.png" Height="30"/>
                             <TextBlock Text="Upload" VerticalAlignment="Center" Margin="5 0 0 0"/>
                         </StackPanel>
                     </Button>
@@ -209,19 +209,19 @@
                 
                 <Button x:Name="btnDeleteTeam" Grid.Row="9" Grid.Column="1" HorizontalAlignment="Center" Margin="0 30">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="/Assets/icons/icons8-delete-64.png" Width="30"/>
+                        <Image Source="/Assets/icons/icons8-delete-64.png" Height="30"/>
                         <TextBlock Text="Delete" VerticalAlignment="Center" Margin="5 0 0 0"/>
                     </StackPanel>
                 </Button>
-                <Button x:Name="btnCancelTeam" Grid.Row="9" Grid.Column="2" HorizontalAlignment="Center" Margin="0 30">
+                <Button x:Name="btnCancelTeam" Grid.Row="9" Grid.Column="2" HorizontalAlignment="Center" Margin="0 30" Click="btnCancelTeam_Click">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="/Assets/icons/icons8-cancel-48.png" Width="30"/>
+                        <Image Source="/Assets/icons/icons8-cancel-48.png" Height="30"/>
                         <TextBlock Text="Cancel" VerticalAlignment="Center" Margin="5 0 0 0"/>
                     </StackPanel>
                 </Button>
                 <Button x:Name="btnSaveTeam" Grid.Row="9" Grid.Column="3" HorizontalAlignment="Center" Margin="0 30" Click="btnSaveTeam_Click">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="/Assets/icons/icons8-save-50.png" Width="30"/>
+                        <Image Source="/Assets/icons/icons8-save-50.png" Height="30"/>
                         <TextBlock Text="Save" VerticalAlignment="Center" Margin="5 0 0 0"/>
                     </StackPanel>
                 </Button>
@@ -257,7 +257,7 @@
                         <Button x:Name="btnAddPlayers" Background="LightGray" Margin="10"
                                 VerticalAlignment="Top" HorizontalAlignment="Right" Click="btnAddPlayers_Click">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="/Assets/icons/icons8-add-64.png" Width="30"/>
+                                <Image Source="/Assets/icons/icons8-add-64.png" Height="30"/>
                                 <TextBlock Text="Add" VerticalAlignment="Center" Margin="5 0 0 0"/>
                             </StackPanel>
                         </Button>

@@ -500,6 +500,9 @@ namespace NBA.View
             ContentDialogResult result = await cpd.ShowAsync();
         }
 
-
+        private void btnCancelTeam_Click(object sender, RoutedEventArgs e)
+        {
+            mostrarFormulari();
+        }
     }
 }

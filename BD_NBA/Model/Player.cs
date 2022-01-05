@@ -10,6 +10,7 @@ namespace NBA_BD.Model
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        int teamId;
         int playerId;
         int playerCurrentNumber;
         String playerFirstName;
@@ -21,22 +22,35 @@ namespace NBA_BD.Model
         int playerHeight;
         float playerWeight;
         DateTime playerBithday;
-        String playerPosition;
+        int playerPosition;
 
-        public Player(int playerId, int playerCurrentNumber, string playerFirstName, string playerLastName, byte[] playerPhoto, College collageName, int playerCareerStartYear, Country country, int playerHeight, float playerWeight, DateTime playerBithday, String playerPosition)
+        public Player(int teamId, int playerId, int playerCurrentNumber, string playerFirstName, string playerLastName, byte[] playerPhoto, College collageName, int playerCareerStartYear, Country country, int playerHeight, float playerWeight, DateTime playerBithday, int playerPosition)
         {
+            TeamId = teamId;
             PlayerId = playerId;
             PlayerCurrentNumber = playerCurrentNumber;
             PlayerFirstName = playerFirstName;
             PlayerLastName = playerLastName;
             PlayerPhoto = playerPhoto;
-            CollageName = collageName;
+            College = collageName;
             PlayerCareerStartYear = playerCareerStartYear;
             Country = country;
             PlayerHeight = playerHeight;
             PlayerWeight = playerWeight;
             PlayerBithday = playerBithday;
             PlayerPosition = playerPosition;
+        }
+
+        public int TeamId
+        {
+            get
+            {
+                return teamId;
+            }
+            set
+            {
+                teamId = value;
+            }
         }
 
         public int PlayerId {
@@ -57,6 +71,7 @@ namespace NBA_BD.Model
             }
             set
             {
+                if (!validaNumber(value)) throw new Exception("El numero ha de ser positiu");
                 playerCurrentNumber = value;
             }
         }
@@ -67,6 +82,7 @@ namespace NBA_BD.Model
             }
             set
             {
+                if (!validaText(value)) throw new Exception("El nom ha de tenir com a minim 4 caracters");
                 playerFirstName = value;
             }
         }
@@ -77,6 +93,7 @@ namespace NBA_BD.Model
             }
             set
             {
+                if (!validaText(value)) throw new Exception("El cognom ha de tenir com a minim 4 caracters");
                 playerLastName = value;
             } 
         }
@@ -90,7 +107,7 @@ namespace NBA_BD.Model
                 playerPhoto = value;
             } 
         }
-        public College CollageName { 
+        public College College { 
             get
             {
                 return collageName;
@@ -107,6 +124,7 @@ namespace NBA_BD.Model
             }
             set
             {
+                if (!validaYear(value)) throw new Exception("L'any ha d'estar entre 1900 i l'any actual");
                 playerCareerStartYear = value;
             } 
         }
@@ -128,6 +146,7 @@ namespace NBA_BD.Model
             }
             set
             {
+                if (!validaHeight(value)) throw new Exception("Entre 130 i 250 cm");
                 playerHeight = value;
             } 
         }
@@ -138,6 +157,7 @@ namespace NBA_BD.Model
             }
             set
             {
+                if (!validaWeight(value)) throw new Exception("Entre 40 i 200 cm");
                 playerWeight = value;
             } 
         }
@@ -151,16 +171,61 @@ namespace NBA_BD.Model
                 playerBithday = value;
             } 
         }
-        public String PlayerPosition { 
+        public int PlayerPosition { 
             get
             {
                 return playerPosition;
             }
             set
             {
+                if (!validaPosition(value)) throw new Exception("Entre 1 i 7");
                 playerPosition = value;
             } 
         }
 
+        public String getPlayerPosition(int playerPosition)
+        {
+            switch (playerPosition)
+            {
+                case 1: return "Center";
+                case 2: return "Guard";
+                case 3: return "Center, Guard";
+                case 4: return "Forward";
+                case 5: return "Center, Forward";
+                case 6: return "Guard, Forward";
+                case 7: return "Center, Guard, Forward";
+                default: return "";
+            }
+        }
+
+        public static bool validaText(String text)
+        {
+            return text.Length > 4;
+        }
+
+        public static bool validaNumber(int number)
+        {
+            return number >= 0;
+        }
+
+        public static bool validaYear(int year)
+        {
+            return year >= 1900 && year <= DateTime.Today.Year;
+        }
+
+        public static bool validaHeight(int height)
+        {
+            return height > 130 && height < 250;
+        }
+
+        public static bool validaWeight(float weight)
+        {
+            return weight > 40 && weight < 200;
+        }
+
+        public static bool validaPosition(int position)
+        {
+            return position > 0 && position < 8;
+        }
     }
 }

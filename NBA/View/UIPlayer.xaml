@@ -60,8 +60,8 @@
                 <TextBlock x:Name="txbStartYear" Margin="3 0 0 0"/>
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Horizontal">
-                <TextBlock x:Name="tbxTitleCollage" />
-                <TextBlock x:Name="txbCollage" Margin="3 0 0 0"/>
+                <TextBlock x:Name="tbxTitleCollege" />
+                <TextBlock x:Name="txbCollege" Margin="3 0 0 0"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Column="2" Grid.Row="1">

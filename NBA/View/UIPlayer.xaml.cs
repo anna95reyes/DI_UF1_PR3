@@ -54,31 +54,24 @@ namespace NBA.View
             if (ElPlayer != null)
             {
                 imgPlayer.Source = await ImageFromBytes(ElPlayer.PlayerPhoto);
-                /*
-                 * torno a fer el if perque es pot donar el cas que el player no sigui null quan esta generant la imatge
-                 * del player pero al acabar de generar la imatge sigui null perque hagui hagut algun canvi mentres tant.
-                 */
-                if (ElPlayer != null)
+                txbWeight.Text = ElPlayer.PlayerWeight.ToString();
+                txbHeight.Text = ElPlayer.PlayerHeight.ToString();
+                txbBirthday.Text = ElPlayer.PlayerBithday.ToString("dd.MM.yyyy");
+                txbStartYear.Text = ElPlayer.PlayerCareerStartYear.ToString();
+                if (ElPlayer.College.Name != null)
                 {
-                    txbWeight.Text = ElPlayer.PlayerWeight.ToString();
-                    txbHeight.Text = ElPlayer.PlayerHeight.ToString();
-                    txbBirthday.Text = ElPlayer.PlayerBithday.ToString("dd.MM.yyyy");
-                    txbStartYear.Text = ElPlayer.PlayerCareerStartYear.ToString();
-                    if (ElPlayer.CollageName != null)
-                    {
-                        tbxTitleCollage.Text = "Collage: ";
-                        txbCollage.Text = ElPlayer.CollageName.ToString();
-                    }
-                    else
-                    {
-                        tbxTitleCollage.Text = "";
-                    }
-                    txbNumber.Text = ElPlayer.PlayerCurrentNumber.ToString();
-                    txbFirstName.Text = ElPlayer.PlayerFirstName;
-                    txbLastName.Text = ElPlayer.PlayerLastName;
-                    txbPosition.Text = ElPlayer.PlayerPosition;
-                    generarImatgeSvg(imgFlag, rutaImgFlagsAppData(ElPlayer.Country.ShortName), 480, 640);
+                    tbxTitleCollege.Text = "Collage: ";
+                    txbCollege.Text = ElPlayer.College.ToString();
                 }
+                else
+                {
+                    tbxTitleCollege.Text = "";
+                }
+                txbNumber.Text = ElPlayer.PlayerCurrentNumber.ToString();
+                txbFirstName.Text = ElPlayer.PlayerFirstName;
+                txbLastName.Text = ElPlayer.PlayerLastName;
+                txbPosition.Text = ElPlayer.getPlayerPosition(ElPlayer.PlayerPosition);
+                generarImatgeSvg(imgFlag, rutaImgFlagsAppData(CountryDB.GetShortCountry(ElPlayer.Country.Name)), 480, 640);
             }
         }
 
@@ -95,15 +88,6 @@ namespace NBA.View
                 }
             }
             return image;
-        }
-
-        public async static Task<byte[]> ImageToBytes(BitmapImage image)
-        {
-            RandomAccessStreamReference streamRef = RandomAccessStreamReference.CreateFromUri(image.UriSource);
-            IRandomAccessStreamWithContentType streamWithContent = await streamRef.OpenReadAsync();
-            byte[] buffer = new byte[streamWithContent.Size];
-            await streamWithContent.ReadAsync(buffer.AsBuffer(), (uint)streamWithContent.Size, InputStreamOptions.None);
-            return buffer;
         }
 
         private void generarImatgeSvg(Image img, String url, int height, int width)
@@ -128,9 +112,13 @@ namespace NBA.View
             DisplayDeletePlayerDialog();
         }
 
-        private void btnEditPlayer_Click(object sender, RoutedEventArgs e)
+        private async void btnEditPlayer_Click(object sender, RoutedEventArgs e)
         {
-
+            ContentDialog cpd = new ContentPlayerDialog
+            {
+                ElPlayer = ElPlayer
+            };
+            ContentDialogResult result = await cpd.ShowAsync();
         }
 
         private async void DisplayDeletePlayerDialog()

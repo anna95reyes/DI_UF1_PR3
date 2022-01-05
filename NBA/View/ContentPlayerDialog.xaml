@@ -23,7 +23,7 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="350"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -40,13 +40,13 @@
                         <RowDefinition Height="auto"/> <!-- Position -->
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Number:" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
-                    <TextBox   Grid.Row="0" Grid.Column="1" x:Name="txtPlayerCurrentNumber" Margin="10" Width="200" HorizontalAlignment="Left"></TextBox>
+                    <TextBox   Grid.Row="0" Grid.Column="1" x:Name="txtPlayerCurrentNumber" Margin="10" Width="200" HorizontalAlignment="Left" TextChanged="txtPlayerCurrentNumber_TextChanged"></TextBox>
                 
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="First name:" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
-                    <TextBox   Grid.Row="1" Grid.Column="1" x:Name="txtPlayerFirstName" Margin="10" Width="200" HorizontalAlignment="Left"></TextBox>
+                    <TextBox   Grid.Row="1" Grid.Column="1" x:Name="txtPlayerFirstName" Margin="10" Width="200" HorizontalAlignment="Left" TextChanged="txtPlayerFirstName_TextChanged"></TextBox>
                 
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Last name:" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
-                    <TextBox   Grid.Row="2" Grid.Column="1" x:Name="txtPlayerLastName" Margin="10" Width="200" HorizontalAlignment="Left"></TextBox>
+                    <TextBox   Grid.Row="2" Grid.Column="1" x:Name="txtPlayerLastName" Margin="10" Width="200" HorizontalAlignment="Left" TextChanged="txtPlayerLastName_TextChanged"></TextBox>
 
                     <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="10">
                         <Grid.ColumnDefinitions>
@@ -57,7 +57,7 @@
                                HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
                         <Button x:Name="btnPlayerPhoto" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                                Margin="10" Padding="5 0" Background="LightGray">
+                                Margin="10" Padding="5 0" Background="LightGray" Click="btnPlayerPhoto_Click">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/Assets/icons/icons8-save-50.png" Width="20"/>
                                 <TextBlock Text="Upload" VerticalAlignment="Center" Margin="5 0 0 0"/>
@@ -65,31 +65,31 @@
                         </Button>
                     </Grid>
                     <TextBlock Grid.Row="4" Grid.Column="0" Text="Collage:" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
-                    <ComboBox  Grid.Row="4" Grid.Column="1" x:Name="cbxCollageName" Margin="10" Width="200" HorizontalAlignment="Left"></ComboBox>
+                    <ComboBox  Grid.Row="4" Grid.Column="1" x:Name="cbxCollageName" Margin="10" Width="200" HorizontalAlignment="Left" SelectionChanged="cbxCollageName_SelectionChanged"></ComboBox>
 
                     <TextBlock Grid.Row="5" Grid.Column="0" Text="Start year:" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
-                    <TextBox   Grid.Row="5" Grid.Column="1" x:Name="txtPlayerCareerStartYear" Margin="10" Width="75" HorizontalAlignment="Left"></TextBox>
+                    <TextBox   Grid.Row="5" Grid.Column="1" x:Name="txtPlayerCareerStartYear" Margin="10" Width="75" HorizontalAlignment="Left" TextChanged="txtPlayerCareerStartYear_TextChanged"></TextBox>
 
                     <TextBlock Grid.Row="6" Grid.Column="0" Text="Country:" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
-                    <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" Width="300">
-                        <ComboBox   x:Name="cbxCountryName" Margin="10" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"></ComboBox>
-                        <Image x:Name="imgFlagCountryShortName" Height="100" MaxWidth="100" Margin="30 0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                    <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal">
+                        <ComboBox   x:Name="cbxCountryName" Margin="10" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" SelectionChanged="cbxCountryName_SelectionChanged"></ComboBox>
+                        <Image x:Name="imgFlagCountryShortName" Height="80" MaxWidth="80" Margin="30 0" VerticalAlignment="Center" HorizontalAlignment="Left" />
                     </StackPanel>
                 
                     <TextBlock Grid.Row="7" Grid.Column="0" Text="Height:" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
-                    <TextBox   Grid.Row="7" Grid.Column="1" x:Name="txtPlayerHeight" Margin="10" Width="75" HorizontalAlignment="Left"></TextBox>
+                    <TextBox   Grid.Row="7" Grid.Column="1" x:Name="txtPlayerHeight" Margin="10" Width="75" HorizontalAlignment="Left" TextChanged="txtPlayerHeight_TextChanged"></TextBox>
                 
                     <TextBlock Grid.Row="8" Grid.Column="0" Text="Weight:" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
-                    <TextBox   Grid.Row="8" Grid.Column="1" x:Name="txtPlayerWeight" Margin="10" Width="75" HorizontalAlignment="Left"></TextBox>
+                    <TextBox   Grid.Row="8" Grid.Column="1" x:Name="txtPlayerWeight" Margin="10" Width="75" HorizontalAlignment="Left" TextChanged="txtPlayerWeight_TextChanged"></TextBox>
 
                     <TextBlock Grid.Row="9" Grid.Column="0" Text="Birthday:" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
-                    <CalendarDatePicker Grid.Row="9" Grid.Column="1" x:Name="cdpPlayerBithday"/>
+                    <CalendarDatePicker Grid.Row="9" Grid.Column="1" x:Name="cdpPlayerBithday" Margin="10" DataContextChanged="cdpPlayerBithday_DataContextChanged"/>
 
                     <TextBlock Grid.Row="10" Grid.Column="0" Text="Position:" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10"/>
                     <StackPanel Grid.Row="10" Grid.Column="1" Orientation="Vertical" Margin="10">
-                        <CheckBox  x:Name="ckbPlayerPositionGuard"  Content="Guard" />
-                        <CheckBox  x:Name="ckbPlayerPositionForeward"  Content="Foreward" />
-                        <CheckBox  x:Name="ckbPlayerPositionCenter"  Content="Center" />
+                        <CheckBox  x:Name="ckbPlayerPositionGuard"  Content="Guard" Tag="2" IsEnabledChanged="ckbPlayerPositionGuard_IsEnabledChanged"/>
+                        <CheckBox  x:Name="ckbPlayerPositionForeward"  Content="Foreward" Tag="4" IsEnabledChanged="ckbPlayerPositionForeward_IsEnabledChanged"/>
+                        <CheckBox  x:Name="ckbPlayerPositionCenter"  Content="Center" Tag="1" IsEnabledChanged="ckbPlayerPositionCenter_IsEnabledChanged"/>
                     </StackPanel>
                     
                 </Grid>
@@ -105,7 +105,7 @@
                         <TextBlock Text="Cancel" VerticalAlignment="Center" Margin="5 0 0 0"/>
                     </StackPanel>
                 </Button>
-                <Button x:Name="btnSave" Grid.Column="1" HorizontalAlignment="Right" Click="btnCancel_Click">
+                <Button x:Name="btnSave" Grid.Column="1" HorizontalAlignment="Right" Click="btnSave_Click">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Assets/icons/icons8-save-50.png" Height="20"/>
                         <TextBlock Text="Save" VerticalAlignment="Center" Margin="5 0 0 0"/>
