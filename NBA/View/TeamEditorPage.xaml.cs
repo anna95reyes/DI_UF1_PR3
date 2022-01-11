@@ -63,17 +63,20 @@ namespace NBA.View
         private void canviEstat(Estat estatNou)
         {
             estat = estatNou;
+
             if (estat == Estat.VIEW)
             {
                 btnClearFilter.IsEnabled = false;
-                btnDeleteTeam.IsEnabled = false;
+                activarDesactivarButtonDeleteTeam();
+
+
                 btnCancelTeam.IsEnabled = false;
                 btnSaveTeam.IsEnabled = false;
             }
             else if (estat == Estat.MODIFICACIO)
             {
                 btnClearFilter.IsEnabled = false;
-                btnDeleteTeam.IsEnabled = false;
+                activarDesactivarButtonDeleteTeam();
                 btnCancelTeam.IsEnabled = false;
                 btnSaveTeam.IsEnabled = false;
             }
@@ -135,10 +138,23 @@ namespace NBA.View
 
         private void dgrTeams_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
             mostrarFormulari();
-            if (lsvPlayers.Items.Count == 0)
+        }
+
+        private void activarDesactivarButtonDeleteTeam()
+        {
+            if (dgrTeams.SelectedItem != null)
             {
-                btnDeleteTeam.IsEnabled = true;
+                Team te = (Team)dgrTeams.SelectedItem;
+                if (PlayerDB.GetLlistaPlayers(te.TeamId).Count == 0)
+                {
+                    btnDeleteTeam.IsEnabled = true;
+                } 
+                else
+                {
+                    btnDeleteTeam.IsEnabled = false;
+                }
             }
         }
 
@@ -160,6 +176,7 @@ namespace NBA.View
                 txtLongMap.Text = te.ArenaLong.ToString();
                 generarGeoPositionMapa(te.ArenaLat, te.ArenaLong);
                 lsvPlayers.ItemsSource = PlayerDB.GetLlistaPlayers(te.TeamId);
+                activarDesactivarButtonDeleteTeam();
             }
         }
 
@@ -489,6 +506,7 @@ namespace NBA.View
                     lsvPlayers.ItemsSource = PlayerDB.GetLlistaPlayers(te.TeamId);
                 }
             }
+            activarDesactivarButtonDeleteTeam();
         }
 
 
@@ -503,6 +521,11 @@ namespace NBA.View
         private void btnCancelTeam_Click(object sender, RoutedEventArgs e)
         {
             mostrarFormulari();
+        }
+
+        private void btnDeleteTeam_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

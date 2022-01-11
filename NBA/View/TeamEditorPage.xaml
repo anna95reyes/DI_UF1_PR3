@@ -207,7 +207,7 @@
                     </Button>
                 </Grid>
                 
-                <Button x:Name="btnDeleteTeam" Grid.Row="9" Grid.Column="1" HorizontalAlignment="Center" Margin="0 30">
+                <Button x:Name="btnDeleteTeam" Grid.Row="9" Grid.Column="1" HorizontalAlignment="Center" Margin="0 30" Click="btnDeleteTeam_Click">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Assets/icons/icons8-delete-64.png" Height="30"/>
                         <TextBlock Text="Delete" VerticalAlignment="Center" Margin="5 0 0 0"/>

@@ -2,6 +2,7 @@
 using NBA_BD.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -24,8 +25,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace NBA.View
 {
-    public sealed partial class UIPlayer : UserControl
+    public sealed partial class UIPlayer : UserControl, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         public UIPlayer()
         {
             this.InitializeComponent();

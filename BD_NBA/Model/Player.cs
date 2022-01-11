@@ -82,7 +82,7 @@ namespace NBA_BD.Model
             }
             set
             {
-                if (!validaText(value)) throw new Exception("El nom ha de tenir com a minim 4 caracters");
+                if (!validaText(value)) throw new Exception("El nom es obligatori");
                 playerFirstName = value;
             }
         }
@@ -93,7 +93,7 @@ namespace NBA_BD.Model
             }
             set
             {
-                if (!validaText(value)) throw new Exception("El cognom ha de tenir com a minim 4 caracters");
+                if (!validaText(value)) throw new Exception("El cognom es obligatori");
                 playerLastName = value;
             } 
         }
@@ -200,7 +200,7 @@ namespace NBA_BD.Model
 
         public static bool validaText(String text)
         {
-            return text.Length > 4;
+            return text.Length > 0;
         }
 
         public static bool validaNumber(int number)
