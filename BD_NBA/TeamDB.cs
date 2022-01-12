@@ -81,5 +81,81 @@ namespace NBA_BD
             }
             return teams;
         }
+
+        public static void insert(Team t)
+        {
+            using (MySqlDBContext context = new MySqlDBContext()) //crea el contexte de la base de dades
+            {
+                using (DbConnection connection = context.Database.GetDbConnection()) //pren la conexxio de la BD
+                {
+                    connection.Open();
+                    DbTransaction transaccio = connection.BeginTransaction(); //Creacio d'una transaccio
+
+                    using (DbCommand consulta = connection.CreateCommand())
+                    {
+                        consulta.Transaction = transaccio; // marques la consulta dins de la transacció
+
+                        consulta.CommandText = "select max(id)+1 from team";
+                        int nextTeamId = (int)(Int64)consulta.ExecuteScalar();
+
+                        consulta.CommandText = "select max(id)+1 from arena";
+                        int nextArenaId = (int)(Int64)consulta.ExecuteScalar();
+
+                        DBUtil.crearParametre(consulta, "@team_id", nextTeamId, DbType.Int32);
+                        DBUtil.crearParametre(consulta, "@arena_id", nextArenaId, DbType.Int32);
+                        
+                        DBUtil.crearParametre(consulta, "@team_caption", t.TeamCaption, DbType.String);
+                        DBUtil.crearParametre(consulta, "@team_short_name", t.TeamShortCaption, DbType.String);
+                        DBUtil.crearParametre(consulta, "@division_caption", t.DivisionCaption.Caption, DbType.String);
+                        DBUtil.crearParametre(consulta, "@team_logo", t.TeamLogo, DbType.String);
+                        DBUtil.crearParametre(consulta, "@arena_caption", t.ArenaCaption, DbType.String);
+                        DBUtil.crearParametre(consulta, "@arena_logo", t.ArenaLogo, DbType.String);
+                        DBUtil.crearParametre(consulta, "@arena_about", t.ArenaAbout, DbType.String);
+                        DBUtil.crearParametre(consulta, "@arena_capacity", t.ArenaCapacity, DbType.Int32);
+                        DBUtil.crearParametre(consulta, "@arena_photo", t.ArenaPhoto, DbType.String);
+                        DBUtil.crearParametre(consulta, "@arena_lat", t.ArenaLat, DbType.Double);
+                        DBUtil.crearParametre(consulta, "@arena_long", t.ArenaLong, DbType.Double);
+
+                        consulta.CommandText = "select id from division where caption = @division_caption";
+                        int DivisionId = (int)consulta.ExecuteScalar();
+                        if (DivisionId < 0)
+                        {
+                            transaccio.Rollback();
+                            throw new Exception("No s'ha pogut recuperar la Division");
+                        }
+
+                        DBUtil.crearParametre(consulta, "@division_id", DivisionId, DbType.Int32);
+
+                        consulta.CommandText = @"insert into arena (id, caption, lat, lng, logo, about, photo, capacity)  
+                                                 values (@arena_id, @arena_caption, @arena_lat, @arena_long, @arena_logo,
+                                                         @arena_about, @arena_photo, @arena_capacity)";
+                        int numeroDeFilesArena = consulta.ExecuteNonQuery(); //per fer un update o un delete
+
+                        consulta.CommandText = @"insert into team (id, caption, logo, year_founded, website, short_caption, about, current_division_id, arena_id)  
+                                                 values (@team_id, @team_caption, @team_logo, 1900, '', @team_short_name, '', @division_id, @arena_id)";
+                        int numeroDeFilesTeam = consulta.ExecuteNonQuery(); //per fer un update o un delete
+
+                        if (numeroDeFilesArena != 1 && numeroDeFilesTeam != 1)
+                        {
+                            //shit happens
+                            transaccio.Rollback();
+                        }
+                        else
+                        {
+                            t.TeamId = (int)nextTeamId;
+                            transaccio.Commit();
+                        }
+
+                    }
+
+                }
+
+            }
+        }
+
+        public static void update(Team te)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

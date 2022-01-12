@@ -163,14 +163,14 @@ namespace NBA.View
             if (dgrTeams.SelectedItem != null)
             {
                 Team te = (Team)dgrTeams.SelectedItem;
-                txtNameTeam.Text = te.TeamCaption;
-                txtShortNameTeam.Text = te.TeamShortCaption;
+                txtCaptionTeam.Text = te.TeamCaption;
+                txtShortCaptionTeam.Text = te.TeamShortCaption;
                 cbxDivision.SelectedItem = te.DivisionCaption;
                 generarImatgeSvg(imgLogoTeam, te.TeamLogo, 400, 400);
-                txtArena.Text = te.ArenaCaption;
+                txtCaptionArena.Text = te.ArenaCaption;
                 imgLogoArena.Source = new BitmapImage(new Uri(te.ArenaLogo));
-                txtAbout.Text = te.ArenaAbout;
-                txtCapacity.Text = te.ArenaCapacity.ToString();
+                txtAboutArena.Text = te.ArenaAbout;
+                txtCapacityArena.Text = te.ArenaCapacity.ToString();
                 imgPhotoArena.Source = new BitmapImage(new Uri(te.ArenaPhoto));
                 txtLatMap.Text = te.ArenaLat.ToString();
                 txtLongMap.Text = te.ArenaLong.ToString();
@@ -182,14 +182,14 @@ namespace NBA.View
 
         private void netejarFormulari()
         {
-            txtNameTeam.Text = "";
-            txtShortNameTeam.Text = "";
+            txtCaptionTeam.Text = "";
+            txtShortCaptionTeam.Text = "";
             cbxDivision.SelectedItem = null;
             imgLogoTeam.Source = null;
-            txtArena.Text = "";
+            txtCaptionArena.Text = "";
             imgLogoArena.Source = null;
-            txtAbout.Text = "";
-            txtCapacity.Text = "";
+            txtAboutArena.Text = "";
+            txtCapacityArena.Text = "";
             imgPhotoArena.Source = null;
             txtLatMap.Text = "";
             txtLongMap.Text = "";
@@ -224,14 +224,12 @@ namespace NBA.View
 
         private void txtLatMap_TextChanged(object sender, TextChangedEventArgs e)
         {
-            canviEstat(Estat.MODIFICACIO);
             validarDadesFormulari();
             cambiarCordenadesMapa();
         }
 
         private void txtLongMap_TextChanged(object sender, TextChangedEventArgs e)
         {
-            canviEstat(Estat.MODIFICACIO);
             validarDadesFormulari();
             cambiarCordenadesMapa();
         }
@@ -269,7 +267,7 @@ namespace NBA.View
                 // Cerca la carpeta de dades de l'aplicació, dins de ApplicationData
                 var folder = ApplicationData.Current.LocalFolder;
                 // Dins de la carpeta de dades, creem una nova carpeta "icons"
-                var iconsFolder = await folder.CreateFolderAsync("icons", CreationCollisionOption.OpenIfExists);
+                var iconsFolder = await folder.CreateFolderAsync("images", CreationCollisionOption.OpenIfExists);
                 // Creem un nom usant la data i hora, de forma que no poguem repetir noms.
                 string name = (DateTime.Now).ToString("yyyyMMddhhmmss") + "_" + sf.Name;
                 // Copiar l'arxiu triat a la carpeta indicada, usant el nom que hem muntat
@@ -280,7 +278,6 @@ namespace NBA.View
                 // ..... YOUR CODE HERE ...........
                 generarImatgeSvg(imgLogoTeam, copiedFile.Path, 400, 400);
 
-                canviEstat(Estat.MODIFICACIO);
                 validarDadesFormulari();
             }
         }
@@ -297,7 +294,7 @@ namespace NBA.View
                 // Cerca la carpeta de dades de l'aplicació, dins de ApplicationData
                 var folder = ApplicationData.Current.LocalFolder;
                 // Dins de la carpeta de dades, creem una nova carpeta "icons"
-                var iconsFolder = await folder.CreateFolderAsync("icons", CreationCollisionOption.OpenIfExists);
+                var iconsFolder = await folder.CreateFolderAsync("images", CreationCollisionOption.OpenIfExists);
                 // Creem un nom usant la data i hora, de forma que no poguem repetir noms.
                 string name = (DateTime.Now).ToString("yyyyMMddhhmmss") + "_" + sf.Name;
                 // Copiar l'arxiu triat a la carpeta indicada, usant el nom que hem muntat
@@ -308,7 +305,6 @@ namespace NBA.View
                 // ..... YOUR CODE HERE ...........
                 imgLogoArena.Source = tmpBitmap;
 
-                canviEstat(Estat.MODIFICACIO);
                 validarDadesFormulari();
             }
         }
@@ -325,7 +321,7 @@ namespace NBA.View
                 // Cerca la carpeta de dades de l'aplicació, dins de ApplicationData
                 var folder = ApplicationData.Current.LocalFolder;
                 // Dins de la carpeta de dades, creem una nova carpeta "icons"
-                var iconsFolder = await folder.CreateFolderAsync("icons", CreationCollisionOption.OpenIfExists);
+                var iconsFolder = await folder.CreateFolderAsync("images", CreationCollisionOption.OpenIfExists);
                 // Creem un nom usant la data i hora, de forma que no poguem repetir noms.
                 string name = (DateTime.Now).ToString("yyyyMMddhhmmss") + "_" + sf.Name;
                 // Copiar l'arxiu triat a la carpeta indicada, usant el nom que hem muntat
@@ -336,7 +332,6 @@ namespace NBA.View
                 // ..... YOUR CODE HERE ...........
                 imgPhotoArena.Source = tmpBitmap;
 
-                canviEstat(Estat.MODIFICACIO);
                 validarDadesFormulari();
             }   
         }
@@ -350,19 +345,25 @@ namespace NBA.View
                 if (dgrTeams.SelectedItem != null)
                 {
                     Team teamEditat = (Team)dgrTeams.SelectedItem;
-                    hiHaCanvis = !(teamEditat.TeamCaption.Equals(txtNameTeam.Text) &&
-                                   teamEditat.TeamShortCaption.Equals(txtShortNameTeam.Text) && 
+                    hiHaCanvis = !(teamEditat.TeamCaption.Equals(txtCaptionTeam.Text) &&
+                                   teamEditat.TeamShortCaption.Equals(txtShortCaptionTeam.Text) &&
                                    teamEditat.DivisionCaption.Equals((Division)cbxDivision.SelectedItem) &&
                                    teamEditat.TeamLogo.Equals(((SvgImageSource)imgLogoTeam.Source).UriSource.AbsoluteUri) &&
-                                   teamEditat.ArenaCaption.Equals(txtArena.Text) &&
+                                   teamEditat.ArenaCaption.Equals(txtCaptionArena.Text) &&
                                    teamEditat.ArenaLogo.Equals(((BitmapImage)imgLogoArena.Source).UriSource.AbsoluteUri) &&
-                                   teamEditat.ArenaAbout.Equals(txtAbout.Text) &&
-                                   teamEditat.ArenaCapacity.Equals(Int32.Parse(txtCapacity.Text)) &&
+                                   teamEditat.ArenaAbout.Equals(txtAboutArena.Text) &&
+                                   teamEditat.ArenaCapacity.Equals(Int32.Parse(txtCapacityArena.Text)) &&
                                    teamEditat.ArenaPhoto.Equals(((BitmapImage)imgPhotoArena.Source).UriSource.AbsoluteUri) &&
                                    teamEditat.ArenaLat.Equals(Double.Parse(txtLatMap.Text)) &&
                                    teamEditat.ArenaLong.Equals(Double.Parse(txtLongMap.Text)) &&
                                    lsvPlayers.Items.Equals(PlayerDB.GetLlistaPlayers(teamEditat.TeamId)));
+                    canviEstat(Estat.MODIFICACIO);
                 }
+                else
+                {
+                    canviEstat(Estat.ALTA);
+                }
+
                 if (estat == Estat.MODIFICACIO && hiHaCanvis || estat == Estat.ALTA)
                 {
                     btnCancelTeam.IsEnabled = true;
@@ -380,20 +381,20 @@ namespace NBA.View
         {
             bool formulariValid = false;
             int capacity = -1;
-            double lat = 0;
-            double lng = 0;
+            double lat = -200;
+            double lng = -200;
 
-            campTextBoxValid(Team.validaText(txtNameTeam.Text), txtNameTeam);
-            campTextBoxValid(Team.validaShortCaption(txtShortNameTeam.Text), txtShortNameTeam);
-            campTextBoxValid(Team.validaText(txtArena.Text), txtArena);
-            campTextBoxValid(Team.validaText(txtAbout.Text), txtAbout);
-            capacity = campIntegerValid(capacity, txtCapacity);
+            campTextBoxValid(Team.validaText(txtCaptionTeam.Text), txtCaptionTeam);
+            campTextBoxValid(Team.validaShortCaption(txtShortCaptionTeam.Text), txtShortCaptionTeam);
+            campTextBoxValid(Team.validaText(txtCaptionArena.Text), txtCaptionArena);
+            campTextBoxValid(Team.validaText(txtAboutArena.Text), txtAboutArena);
+            capacity = campIntegerValid(capacity, txtCapacityArena);
             lat = campDoubleValid(lat, txtLatMap);
             lng = campDoubleValid(lng, txtLongMap);
 
-            if (Team.validaText(txtNameTeam.Text) && Team.validaShortCaption(txtShortNameTeam.Text) &&
-                imgLogoTeam.Source != null && Team.validaText(txtArena.Text) &&
-                imgLogoArena.Source != null && Team.validaText(txtAbout.Text) &&
+            if (Team.validaText(txtCaptionTeam.Text) && Team.validaShortCaption(txtShortCaptionTeam.Text) &&
+                imgLogoTeam.Source != null && Team.validaText(txtCaptionArena.Text) &&
+                imgLogoArena.Source != null && Team.validaText(txtAboutArena.Text) &&
                 Team.validaCapacity(capacity) && imgPhotoArena.Source != null &&
                 Team.validaLatitud(lat) && Team.validaLongitud(lng)
                 )
@@ -449,13 +450,11 @@ namespace NBA.View
 
         private void txtNameTeam_TextChanged(object sender, TextChangedEventArgs e)
         {
-            canviEstat(Estat.MODIFICACIO);
             validarDadesFormulari();
         }
 
         private void txtShortNameTeam_TextChanged(object sender, TextChangedEventArgs e)
         {
-            canviEstat(Estat.MODIFICACIO);
             validarDadesFormulari();
         }
 
@@ -463,26 +462,22 @@ namespace NBA.View
         {
             if (cbxDivision.SelectedItem != null)
             {
-                canviEstat(Estat.MODIFICACIO);
                 validarDadesFormulari();
             }
         }
 
         private void txtArena_TextChanged(object sender, TextChangedEventArgs e)
         {
-            canviEstat(Estat.MODIFICACIO);
             validarDadesFormulari();
         }
 
         private void txtAbout_TextChanged(object sender, TextChangedEventArgs e)
         {
-            canviEstat(Estat.MODIFICACIO);
             validarDadesFormulari();
         }
 
         private void txtCapacity_TextChanged(object sender, TextChangedEventArgs e)
         {
-            canviEstat(Estat.MODIFICACIO);
             validarDadesFormulari();
         }
 
@@ -498,15 +493,37 @@ namespace NBA.View
 
         private void btnSaveTeam_Click(object sender, RoutedEventArgs e)
         {
-            if (dgrTeams.SelectedItem != null)
+            if (estat == Estat.MODIFICACIO)
             {
-                Team te = (Team)dgrTeams.SelectedItem;
-                if (!lsvPlayers.Items.Equals(PlayerDB.GetLlistaPlayers(te.TeamId)))
+                if (dgrTeams.SelectedItem != null)
                 {
-                    lsvPlayers.ItemsSource = PlayerDB.GetLlistaPlayers(te.TeamId);
+                    Team te = (Team)dgrTeams.SelectedItem;
+                    if (!lsvPlayers.Items.Equals(PlayerDB.GetLlistaPlayers(te.TeamId)))
+                    {
+                        lsvPlayers.ItemsSource = PlayerDB.GetLlistaPlayers(te.TeamId);
+                    }
+                    activarDesactivarButtonDeleteTeam();
+
+                    te = new Team(te.TeamId, txtCaptionTeam.Text, txtShortCaptionTeam.Text, new Division(cbxDivision.SelectedItem.ToString()),
+                                  ((SvgImageSource)imgLogoTeam.Source).UriSource.AbsoluteUri, txtCaptionArena.Text,
+                                  ((BitmapImage)imgLogoArena.Source).UriSource.AbsoluteUri, txtAboutArena.Text,
+                                  Int32.Parse(txtCapacityArena.Text), ((BitmapImage)imgPhotoArena.Source).UriSource.AbsoluteUri,
+                                  Double.Parse(txtLatMap.Text), Double.Parse(txtLongMap.Text));
+                    TeamDB.update(te);
                 }
             }
-            activarDesactivarButtonDeleteTeam();
+            else if (estat == Estat.ALTA)
+            {
+                Team te = new Team(1, txtCaptionTeam.Text, txtShortCaptionTeam.Text, new Division(cbxDivision.SelectedItem.ToString()),
+                                  ((SvgImageSource)imgLogoTeam.Source).UriSource.AbsoluteUri, txtCaptionArena.Text,
+                                  ((BitmapImage)imgLogoArena.Source).UriSource.AbsoluteUri, txtAboutArena.Text, 
+                                  Int32.Parse(txtCapacityArena.Text), ((BitmapImage)imgPhotoArena.Source).UriSource.AbsoluteUri, 
+                                  Double.Parse(txtLatMap.Text), Double.Parse(txtLongMap.Text));
+                TeamDB.insert(te);
+            }
+            teams = TeamDB.GetLlistaTeams((Division)cbxFilterDivision.SelectedItem, txtFilterName.Text);
+            dgrTeams.ItemsSource = teams;
+
         }
 
 
@@ -526,6 +543,13 @@ namespace NBA.View
         private void btnDeleteTeam_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void btnAddTeam_Click(object sender, RoutedEventArgs e)
+        {
+            dgrTeams.SelectedItem = null;
+            netejarFormulari();
+            canviEstat(Estat.ALTA);
         }
     }
 }
