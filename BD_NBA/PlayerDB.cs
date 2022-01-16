@@ -26,23 +26,23 @@ namespace NBA_BD
                     {
                         DBUtil.crearParametre(consulta, "@param_team_id", teamId, DbType.Int32);
 
-                        consulta.CommandText = @"select p.id as player_id,
-                                                        p.current_number as player_current_number, 
-	                                                    p.first_name as player_first_name,
-                                                        p.last_name as player_last_name,
-                                                        p.photo as player_photo,
-                                                        c.name as collage_name,
-                                                        p.career_start_year as player_cureer_start_year,
-                                                        co.name as country_name, 
-                                                        co.short_name as country_short_name,
-                                                        p.height as player_height,
-                                                        p.weight as player_weight, 
-                                                        p.birthday as player_bithday,
-                                                        p.position+1-1 as player_position
-                                                 from player p join team t on p.current_team_id = t.id
-			                                                  left join college c on p.college_id = c.id
-                                                              join country co on p.country_id = co.id
-                                                 where t.id = @param_team_id";
+                        consulta.CommandText = $@"select p.id as player_id,
+                                                         p.current_number as player_current_number, 
+	                                                     p.first_name as player_first_name,
+                                                         p.last_name as player_last_name,
+                                                         p.photo as player_photo,
+                                                         c.name as collage_name,
+                                                         p.career_start_year as player_cureer_start_year,
+                                                         co.name as country_name, 
+                                                         co.short_name as country_short_name,
+                                                         p.height as player_height,
+                                                         p.weight as player_weight, 
+                                                         p.birthday as player_bithday,
+                                                         p.position+1-1 as player_position
+                                                  from player p join team t on p.current_team_id = t.id
+			                                                    left join college c on p.college_id = c.id
+                                                                join country co on p.country_id = co.id
+                                                  where t.id = @param_team_id";
 
                         DbDataReader reader = consulta.ExecuteReader(); //per cuan pot retorna mes d'una fila
 
@@ -126,6 +126,16 @@ namespace NBA_BD
             }
         }
 
+        public static void insert(Player p)
+        {
+            //TODO: fer l'insert
+        }
+
+        public static void update(Player p)
+        {
+            //TODO: fer l'update
+        }
+
         private static string readerStringOrNull(DbDataReader reader, int ordinal, String valorPerDefecte)
         {
             string value = valorPerDefecte;
@@ -136,9 +146,6 @@ namespace NBA_BD
             return value;
         }
 
-        public static void insert(Player p)
-        {
-            //TODO: fer l'insert
-        }
+        
     }
 }

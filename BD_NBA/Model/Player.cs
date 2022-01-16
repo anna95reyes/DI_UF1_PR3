@@ -227,5 +227,42 @@ namespace NBA_BD.Model
         {
             return position > 0 && position < 8;
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Player player &&
+                   TeamId == player.TeamId &&
+                   PlayerId == player.PlayerId &&
+                   PlayerCurrentNumber == player.PlayerCurrentNumber &&
+                   PlayerFirstName == player.PlayerFirstName &&
+                   PlayerLastName == player.PlayerLastName &&
+                   EqualityComparer<byte[]>.Default.Equals(PlayerPhoto, player.PlayerPhoto) &&
+                   EqualityComparer<College>.Default.Equals(College, player.College) &&
+                   PlayerCareerStartYear == player.PlayerCareerStartYear &&
+                   EqualityComparer<Country>.Default.Equals(Country, player.Country) &&
+                   PlayerHeight == player.PlayerHeight &&
+                   PlayerWeight == player.PlayerWeight &&
+                   PlayerBithday == player.PlayerBithday &&
+                   PlayerPosition == player.PlayerPosition;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1255786363;
+            hashCode = hashCode * -1521134295 + TeamId.GetHashCode();
+            hashCode = hashCode * -1521134295 + PlayerId.GetHashCode();
+            hashCode = hashCode * -1521134295 + PlayerCurrentNumber.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(PlayerFirstName);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(PlayerLastName);
+            hashCode = hashCode * -1521134295 + EqualityComparer<byte[]>.Default.GetHashCode(PlayerPhoto);
+            hashCode = hashCode * -1521134295 + EqualityComparer<College>.Default.GetHashCode(College);
+            hashCode = hashCode * -1521134295 + PlayerCareerStartYear.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<Country>.Default.GetHashCode(Country);
+            hashCode = hashCode * -1521134295 + PlayerHeight.GetHashCode();
+            hashCode = hashCode * -1521134295 + PlayerWeight.GetHashCode();
+            hashCode = hashCode * -1521134295 + PlayerBithday.GetHashCode();
+            hashCode = hashCode * -1521134295 + PlayerPosition.GetHashCode();
+            return hashCode;
+        }
     }
 }

@@ -92,6 +92,18 @@ namespace NBA.View
         private void loadTeams()
         {
             netejarFormulari();
+            actualitzarLlistaTeams();
+            
+            if (teams != null)
+            {
+                dgrTeams.SelectedIndex = 0;
+            }
+            cbxDivision.ItemsSource = divisions;
+            btnClearFilter.IsEnabled = txtFilterName.Text != "" || cbxFilterDivision.SelectedItem != null;
+        }
+
+        private void actualitzarLlistaTeams()
+        {
             teams = TeamDB.GetLlistaTeams((Division)cbxFilterDivision.SelectedItem, txtFilterName.Text);
             for (int i = 0; i < teams.Count; i++)
             {
@@ -100,12 +112,6 @@ namespace NBA.View
                 teams[i].ArenaPhoto = rutaImgAppData(teams[i].ArenaPhoto);
             }
             dgrTeams.ItemsSource = teams;
-            if (teams != null)
-            {
-                dgrTeams.SelectedIndex = 0;
-            }
-            cbxDivision.ItemsSource = divisions;
-            btnClearFilter.IsEnabled = txtFilterName.Text != "" || cbxFilterDivision.SelectedItem != null;
         }
 
         private String rutaImgAppData(string ruta)
@@ -205,6 +211,14 @@ namespace NBA.View
             img.Source = sis;
         }
 
+        private void generarImatgeSvg(Image img, Uri url, int height, int width)
+        {
+            SvgImageSource sis = new SvgImageSource(url);
+            sis.RasterizePixelHeight = height;
+            sis.RasterizePixelWidth = width;
+            img.Source = sis;
+        }
+
         private void cbxFilterDivision_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             loadTeams();
@@ -276,8 +290,10 @@ namespace NBA.View
                 //BitmapImage tmpBitmap = new BitmapImage(new Uri(copiedFile.Path));
 
                 // ..... YOUR CODE HERE ...........
-                generarImatgeSvg(imgLogoTeam, copiedFile.Path, 400, 400);
-
+                Uri uri = new Uri(Path.Combine(appDataFolder.Path, "images"));
+                uri = new Uri(Path.Combine(uri.AbsoluteUri, copiedFile.Name));
+                
+                generarImatgeSvg(imgLogoTeam, uri, 400, 400);
                 validarDadesFormulari();
             }
         }
@@ -303,6 +319,7 @@ namespace NBA.View
                 BitmapImage tmpBitmap = new BitmapImage(new Uri(copiedFile.Path));
 
                 // ..... YOUR CODE HERE ...........
+
                 imgLogoArena.Source = tmpBitmap;
 
                 validarDadesFormulari();
@@ -330,6 +347,7 @@ namespace NBA.View
                 BitmapImage tmpBitmap = new BitmapImage(new Uri(copiedFile.Path));
 
                 // ..... YOUR CODE HERE ...........
+
                 imgPhotoArena.Source = tmpBitmap;
 
                 validarDadesFormulari();
@@ -357,7 +375,8 @@ namespace NBA.View
                                    teamEditat.ArenaLat.Equals(Double.Parse(txtLatMap.Text)) &&
                                    teamEditat.ArenaLong.Equals(Double.Parse(txtLongMap.Text)) &&
                                    lsvPlayers.Items.Equals(PlayerDB.GetLlistaPlayers(teamEditat.TeamId)));
-                    canviEstat(Estat.MODIFICACIO);
+                    if (hiHaCanvis) canviEstat(Estat.MODIFICACIO);
+                    else canviEstat(Estat.VIEW);
                 }
                 else
                 {
@@ -493,11 +512,19 @@ namespace NBA.View
 
         private void btnSaveTeam_Click(object sender, RoutedEventArgs e)
         {
+            Team te = null;
+            Uri AppData = new Uri(appDataFolder.Path);
+            
+            String ult = ((SvgImageSource)imgLogoTeam.Source).UriSource.AbsoluteUri.Remove(0, AppData.AbsoluteUri.Length+1);
+            String ula = ((BitmapImage)imgLogoArena.Source).UriSource.AbsoluteUri.Remove(0, AppData.AbsoluteUri.Length + 1);
+            String upa = ((BitmapImage)imgPhotoArena.Source).UriSource.AbsoluteUri.Remove(0, AppData.AbsoluteUri.Length + 1);
+            
             if (estat == Estat.MODIFICACIO)
             {
                 if (dgrTeams.SelectedItem != null)
                 {
-                    Team te = (Team)dgrTeams.SelectedItem;
+                    te = (Team)dgrTeams.SelectedItem;
+
                     if (!lsvPlayers.Items.Equals(PlayerDB.GetLlistaPlayers(te.TeamId)))
                     {
                         lsvPlayers.ItemsSource = PlayerDB.GetLlistaPlayers(te.TeamId);
@@ -505,27 +532,32 @@ namespace NBA.View
                     activarDesactivarButtonDeleteTeam();
 
                     te = new Team(te.TeamId, txtCaptionTeam.Text, txtShortCaptionTeam.Text, new Division(cbxDivision.SelectedItem.ToString()),
-                                  ((SvgImageSource)imgLogoTeam.Source).UriSource.AbsoluteUri, txtCaptionArena.Text,
-                                  ((BitmapImage)imgLogoArena.Source).UriSource.AbsoluteUri, txtAboutArena.Text,
-                                  Int32.Parse(txtCapacityArena.Text), ((BitmapImage)imgPhotoArena.Source).UriSource.AbsoluteUri,
+                                  ult, txtCaptionArena.Text, ula, txtAboutArena.Text, Int32.Parse(txtCapacityArena.Text), upa,
                                   Double.Parse(txtLatMap.Text), Double.Parse(txtLongMap.Text));
                     TeamDB.update(te);
                 }
             }
             else if (estat == Estat.ALTA)
             {
-                Team te = new Team(1, txtCaptionTeam.Text, txtShortCaptionTeam.Text, new Division(cbxDivision.SelectedItem.ToString()),
-                                  ((SvgImageSource)imgLogoTeam.Source).UriSource.AbsoluteUri, txtCaptionArena.Text,
-                                  ((BitmapImage)imgLogoArena.Source).UriSource.AbsoluteUri, txtAboutArena.Text, 
-                                  Int32.Parse(txtCapacityArena.Text), ((BitmapImage)imgPhotoArena.Source).UriSource.AbsoluteUri, 
+                te = new Team(1, txtCaptionTeam.Text, txtShortCaptionTeam.Text, new Division(cbxDivision.SelectedItem.ToString()),
+                                  ult, txtCaptionArena.Text, ula, txtAboutArena.Text, Int32.Parse(txtCapacityArena.Text), upa, 
                                   Double.Parse(txtLatMap.Text), Double.Parse(txtLongMap.Text));
                 TeamDB.insert(te);
             }
-            teams = TeamDB.GetLlistaTeams((Division)cbxFilterDivision.SelectedItem, txtFilterName.Text);
-            dgrTeams.ItemsSource = teams;
-
+            netejarFormulari();
+            actualitzarLlistaTeams();
+            if (te != null)
+            {
+                int index;
+                for (index = 0; index < teams.Count; index++)
+                {
+                    if (teams[index].TeamId == te.TeamId) break;
+                }
+                dgrTeams.SelectedIndex = index;
+            }
+            
+            mostrarFormulari();
         }
-
 
         private async void btnAddPlayers_Click(object sender, RoutedEventArgs e)
         {
@@ -540,9 +572,31 @@ namespace NBA.View
             mostrarFormulari();
         }
 
-        private void btnDeleteTeam_Click(object sender, RoutedEventArgs e)
+        private async void btnDeleteTeam_Click(object sender, RoutedEventArgs e)
         {
+            if (dgrTeams.SelectedItem != null)
+            {
+                Team te = (Team)dgrTeams.SelectedItem;
+                if (!TeamDB.delete(te.TeamId))
+                {
+                    /*
+                     * Aqui no ha d'arribar mai perque ja que controlo que el boto Delete estigui
+                     * actiu nomes quan es pot esborrar un equip, pero per si dones la casualitat
+                     * de que el boto Delete es quedes actiu en alguna ocasio, poso aquest misssatge
+                     * i no deixo esborrar. Es a dir, faig doble comprobacio per asegurar-me
+                     */
+                    ContentDialog dialog = new ContentDialog
+                    {
+                        Title = "Error",
+                        Content = "No es pot esborrar l'equip per què té jugadors.",
+                        CloseButtonText = "Ok"
+                    };
 
+                    ContentDialogResult result = await dialog.ShowAsync();
+                }
+            }
+            netejarFormulari();
+            actualitzarLlistaTeams();
         }
 
         private void btnAddTeam_Click(object sender, RoutedEventArgs e)

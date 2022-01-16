@@ -22,9 +22,9 @@ namespace NBA_BD
                     connection.Open();
                     using (DbCommand consulta = connection.CreateCommand())
                     {
-                        consulta.CommandText = @"select name
-                                                 from college
-                                                 order by name";
+                        consulta.CommandText = $@"select name
+                                                  from college
+                                                  order by name";
 
                         DbDataReader reader = consulta.ExecuteReader(); //per cuan pot retorna mes d'una fila
 

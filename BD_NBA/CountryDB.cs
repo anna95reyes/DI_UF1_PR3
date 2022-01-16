@@ -23,9 +23,9 @@ namespace NBA_BD
                     connection.Open();
                     using (DbCommand consulta = connection.CreateCommand())
                     {
-                        consulta.CommandText = @"select name
-                                                 from country
-                                                 order by name";
+                        consulta.CommandText = $@"select name
+                                                  from country
+                                                  order by name";
 
                         DbDataReader reader = consulta.ExecuteReader(); //per cuan pot retorna mes d'una fila
 
@@ -60,9 +60,9 @@ namespace NBA_BD
                     {
                         DBUtil.crearParametre(consulta, "@country_name", nameCountry, DbType.String);
 
-                        consulta.CommandText = @"select short_name
-                                                from country
-                                                where name = @country_name";
+                        consulta.CommandText = $@"select short_name
+                                                  from country
+                                                  where name = @country_name";
 
                         return (String)consulta.ExecuteScalar(); //per cuan pot retorna una i nomes una fila
 
