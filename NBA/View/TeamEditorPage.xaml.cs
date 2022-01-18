@@ -373,8 +373,9 @@ namespace NBA.View
                                    teamEditat.ArenaCapacity.Equals(Int32.Parse(txtCapacityArena.Text)) &&
                                    teamEditat.ArenaPhoto.Equals(((BitmapImage)imgPhotoArena.Source).UriSource.AbsoluteUri) &&
                                    teamEditat.ArenaLat.Equals(Double.Parse(txtLatMap.Text)) &&
-                                   teamEditat.ArenaLong.Equals(Double.Parse(txtLongMap.Text)) &&
-                                   lsvPlayers.Items.Equals(PlayerDB.GetLlistaPlayers(teamEditat.TeamId)));
+                                   teamEditat.ArenaLong.Equals(Double.Parse(txtLongMap.Text)) //&&
+                                   //lsvPlayers.Items.Equals(PlayerDB.GetLlistaPlayers(teamEditat.TeamId))
+                                   );
                     if (hiHaCanvis) canviEstat(Estat.MODIFICACIO);
                     else canviEstat(Estat.VIEW);
                 }
@@ -500,16 +501,6 @@ namespace NBA.View
             validarDadesFormulari();
         }
 
-        private void Player_Eliminat(object sender, EventArgs e)
-        {
-            if (dgrTeams.SelectedItem != null && lsvPlayers.ItemsSource != null)
-            {
-                Team te = (Team)dgrTeams.SelectedItem;
-                Player pl = (Player)lsvPlayers.ItemsSource;
-                lsvPlayers.ItemsSource = PlayerDB.GetLlistaPlayers(te.TeamId);
-            }
-        }
-
         private void btnSaveTeam_Click(object sender, RoutedEventArgs e)
         {
             Team te = null;
@@ -605,5 +596,16 @@ namespace NBA.View
             netejarFormulari();
             canviEstat(Estat.ALTA);
         }
+
+        /*
+        private void lsvPlayers_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
+        {
+            if (dgrTeams.SelectedItem != null && lsvPlayers.ItemsSource != null)
+            {
+                Team te = (Team)dgrTeams.SelectedItem;
+                lsvPlayers.ItemsSource = PlayerDB.GetLlistaPlayers(te.TeamId);
+            }
+        }
+        */
     }
 }

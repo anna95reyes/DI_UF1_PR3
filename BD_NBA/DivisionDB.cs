@@ -17,7 +17,7 @@ namespace NBA_BD
 
             using (MySqlDBContext context = new MySqlDBContext()) //crea el contexte de la base de dades
             {
-                using (DbConnection connection = context.Database.GetDbConnection()) //pren la conexxio de la BD
+                using (DbConnection connection = context.Database.GetDbConnection()) //pren la conexio de la BD
                 {
                     connection.Open();
                     using (DbCommand consulta = connection.CreateCommand())
