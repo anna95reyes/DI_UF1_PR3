@@ -146,13 +146,19 @@ namespace NBA_BD
                         DBUtil.crearParametre(consulta, "@player_id", nextPlayerId, DbType.Int32);
                         DBUtil.crearParametre(consulta, "@country_name", p.Country.Name, DbType.String);
                         DBUtil.crearParametre(consulta, "@country_short_name", p.Country.ShortName, DbType.String);
+                        DBUtil.crearParametre(consulta, "@collage_name", p.College.Name, DbType.String);
 
                         consulta.CommandText = $@"select id 
                                                   from country 
                                                   where name = @country_name and short_name = @country_short_name";
-                        int countryId = (int)(Int64)consulta.ExecuteScalar();
+                        int countryId = (int)consulta.ExecuteScalar();
 
                         DBUtil.crearParametre(consulta, "@country_id", countryId, DbType.Int32);
+
+                        consulta.CommandText = $@"select id from college where name = @collage_name";
+                        int collegeId = (int)consulta.ExecuteScalar();
+
+                        DBUtil.crearParametre(consulta, "@college_id", collegeId, DbType.Int32);
                         /*
                         public Player(int teamId, int playerId, int playerCurrentNumber, string playerFirstName, 
                         string playerLastName, byte[] playerPhoto, College collageName, int playerCareerStartYear, 
@@ -168,23 +174,20 @@ namespace NBA_BD
                         DBUtil.crearParametre(consulta, "@player_last_name", p.PlayerLastName, DbType.String);
                         //reader.GetFieldValue<byte[]>
                         DBUtil.crearParametre(consulta, "@player_photo", p.PlayerPhoto, DbType.Binary);
-                        DBUtil.crearParametre(consulta, "@collage_name", p.College.Name, DbType.String);
                         DBUtil.crearParametre(consulta, "@player_career_start_year", p.PlayerCareerStartYear, DbType.Int32);
                         DBUtil.crearParametre(consulta, "@player_height", p.PlayerHeight, DbType.Int32);
-                        DBUtil.crearParametre(consulta, "@player_weight", p.PlayerWeight, DbType.Int32);
+                        DBUtil.crearParametre(consulta, "@player_weight", p.PlayerWeight, DbType.Decimal);
                         DBUtil.crearParametre(consulta, "@player_bithday", p.PlayerBithday, DbType.Int32);
                         DBUtil.crearParametre(consulta, "@player_position", p.PlayerPosition, DbType.Int32);
-                        /*
-                            id, first_name, last_name, photo, career_start_year, career_end_year,
-                            country_id, height, birthday, weight, college_id, current_team_id,
-                            current_number, rating, nba_profile, photo_play, position
-                         */
-
+                        
                         consulta.CommandText = $@"insert into player (id, first_name, last_name, photo, career_start_year, 
                                                                     career_end_year, country_id, height, birthday, weight, 
                                                                     college_id, current_team_id, current_number, rating, 
                                                                     nba_profile, photo_play, position) 
-                                                  values ( @player_id, @DNOM, @LOC )";
+                                                  values (@player_id, @player_first_name, @player_last_name, @player_photo,
+                                                          @player_career_start_year, null, @country_id, @player_height,
+                                                          @player_bithday, @player_weight, @college_id, @team_id,
+                                                          @player_current_number, null, null, null, @player_position)";
 
                         int numeroDeFiles = consulta.ExecuteNonQuery(); //per fer un update o un delete
                         if (numeroDeFiles != 1)
@@ -207,6 +210,75 @@ namespace NBA_BD
         public static void update(Player p)
         {
             //TODO: fer l'update
+            using (MySqlDBContext context = new MySqlDBContext()) //crea el contexte de la base de dades
+            {
+                using (DbConnection connection = context.Database.GetDbConnection()) //pren la conexxio de la BD
+                {
+                    connection.Open();
+                    DbTransaction transaccio = connection.BeginTransaction(); //Creacio d'una transaccio
+
+                    using (DbCommand consulta = connection.CreateCommand())
+                    {
+                        consulta.Transaction = transaccio; // marques la consulta dins de la transacció
+
+
+                        DBUtil.crearParametre(consulta, "@player_id", p.PlayerId, DbType.Int32);
+                        DBUtil.crearParametre(consulta, "@country_name", p.Country.Name, DbType.String);
+                        DBUtil.crearParametre(consulta, "@country_short_name", p.Country.ShortName, DbType.String);
+                        DBUtil.crearParametre(consulta, "@collage_name", p.College.Name, DbType.String);
+
+                        consulta.CommandText = $@"select id 
+                                                  from country 
+                                                  where name = @country_name and short_name = @country_short_name";
+                        int countryId = (int)consulta.ExecuteScalar();
+
+                        DBUtil.crearParametre(consulta, "@country_id", countryId, DbType.Int32);
+
+                        consulta.CommandText = $@"select id from college where name = @collage_name";
+                        int collegeId = (int)consulta.ExecuteScalar();
+
+                        DBUtil.crearParametre(consulta, "@college_id", collegeId, DbType.Int32);
+                        
+                        DBUtil.crearParametre(consulta, "@team_id", p.TeamId, DbType.Int32);
+                        DBUtil.crearParametre(consulta, "@player_current_number", p.PlayerCurrentNumber, DbType.Int32);
+                        DBUtil.crearParametre(consulta, "@player_first_name", p.PlayerFirstName, DbType.String);
+                        DBUtil.crearParametre(consulta, "@player_last_name", p.PlayerLastName, DbType.String);
+                        //reader.GetFieldValue<byte[]>
+                        DBUtil.crearParametre(consulta, "@player_photo", p.PlayerPhoto, DbType.Binary);
+                        DBUtil.crearParametre(consulta, "@player_career_start_year", p.PlayerCareerStartYear, DbType.Int32);
+                        DBUtil.crearParametre(consulta, "@player_height", p.PlayerHeight, DbType.Int32);
+                        DBUtil.crearParametre(consulta, "@player_weight", p.PlayerWeight, DbType.Decimal);
+                        DBUtil.crearParametre(consulta, "@player_bithday", p.PlayerBithday, DbType.DateTime);
+                        DBUtil.crearParametre(consulta, "@player_position", p.PlayerPosition, DbType.Int32);
+                        
+                        consulta.CommandText = $@"update player set first_name = @player_first_name,
+                                                                    last_name = @player_last_name,
+                                                                    photo = @player_photo,
+                                                                    career_start_year = @player_career_start_year,
+                                                                    country_id =  @country_id,
+                                                                    height = @player_height,
+                                                                    birthday = @player_bithday,
+                                                                    weight = @player_weight,
+                                                                    college_id = @college_id,
+                                                                    current_number = @player_current_number,
+                                                                    position = @player_position
+                                                  where id = @player_id";
+
+                        int numeroDeFiles = consulta.ExecuteNonQuery(); //per fer un update o un delete
+                        if (numeroDeFiles != 1)
+                        {
+                            //shit happens
+                            transaccio.Rollback();
+                        }
+                        else
+                        {
+                            transaccio.Commit();
+                        }
+
+                    }
+
+                }
+            }
         }
 
         private static string readerStringOrNull(DbDataReader reader, int ordinal, String valorPerDefecte)
