@@ -343,19 +343,20 @@ namespace NBA.View
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            DateTime dateTime = new DateTime();
+            DateTimeOffset? dto = (DateTimeOffset?)cdpPlayerBithday.Date;
+            if (dto != null)
+            {
+                dateTime = new DateTime(dto.Value.Ticks);
+            }
+
+            //Byte[] photo = File.ReadAllBytes("player.bin");
+
             if (estat == Estat.ALTA)
             {
-                DateTime dateTime = new DateTime();
-                DateTimeOffset? dto = (DateTimeOffset?)cdpPlayerBithday.Date;
-                if (dto != null)
-                {
-                    dateTime = new DateTime(dto.Value.Ticks);
-                }
-
-
                 //TODO: s'ha de cambiar ElPlayer.PlayerPhoto per la funcio que converteix la foto en byte[]
-                Player p = new Player(ElPlayer.PlayerId, 0, Int32.Parse(txtPlayerCurrentNumber.Text),txtPlayerFirstName.Text,
-                                      txtPlayerLastName.Text,ElPlayer.PlayerPhoto, (College)cbxCollageName.SelectedItem,
+                Player p = new Player(ElPlayer.TeamId, 0, Int32.Parse(txtPlayerCurrentNumber.Text),txtPlayerFirstName.Text,
+                                      txtPlayerLastName.Text,null, (College)cbxCollageName.SelectedItem,
                                       Int32.Parse(txtPlayerCareerStartYear.Text), (Country)cbxCountryName.SelectedItem,
                                       Int32.Parse(txtPlayerHeight.Text), float.Parse(txtPlayerWeight.Text),
                                       dateTime, getPlayerPositions());
@@ -363,8 +364,14 @@ namespace NBA.View
             }
             else
             {
-
+                Player p = new Player(ElPlayer.TeamId, ElPlayer.PlayerId, Int32.Parse(txtPlayerCurrentNumber.Text), txtPlayerFirstName.Text,
+                                      txtPlayerLastName.Text, ElPlayer.PlayerPhoto, (College)cbxCollageName.SelectedItem,
+                                      Int32.Parse(txtPlayerCareerStartYear.Text), (Country)cbxCountryName.SelectedItem,
+                                      Int32.Parse(txtPlayerHeight.Text), float.Parse(txtPlayerWeight.Text),
+                                      dateTime, getPlayerPositions());
+                PlayerDB.update(p);
             }
+            dialogPlayer.Hide();
         }
 
         private void txtPlayerCurrentNumber_TextChanged(object sender, TextChangedEventArgs e)
