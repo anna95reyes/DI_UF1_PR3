@@ -352,7 +352,7 @@ namespace NBA.View
 
             //Byte[] photo = File.ReadAllBytes("player.bin");
 
-            if (estat == Estat.ALTA) 
+            if (estat == Estat.ALTA)
             {
                 //TODO: s'ha de cambiar ElPlayer.PlayerPhoto per la funcio que converteix la foto en byte[]
                 Player p = new Player(ElPlayer.TeamId, 0, Int32.Parse(txtPlayerCurrentNumber.Text),txtPlayerFirstName.Text,
