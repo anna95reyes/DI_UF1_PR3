@@ -47,13 +47,11 @@
                         <TextBlock Text="Clear filter" VerticalAlignment="Center" Margin="5 0 0 0"/>
                     </StackPanel>
                 </Button>
-                <!--<Image Grid.Row="1" Grid.ColumnSpan="3" Source="file:///C:/Users/anna9/AppData/Local/Packages/8d69f301-8a60-45e3-84de-df0173828c73_4sknn5rsd96h6/LocalState/nba_images/teams/ATL.svg"/>-->
+                
                 <controls:DataGrid x:Name="dgrTeams" Grid.Row="1" Grid.ColumnSpan="3" Margin="10" MaxHeight="800"
                                    AutoGenerateColumns="False" CanUserSortColumns="False" IsReadOnly="True"
                                    GridLinesVisibility="None" AlternatingRowBackground="#FFF9F9F9" Background="White"
                                    SelectionChanged="dgrTeams_SelectionChanged">
-                    
-                    
                     
                     <controls:DataGrid.Columns>
                         

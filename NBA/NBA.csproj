@@ -132,8 +132,14 @@
     <Compile Include="View\TeamEditorPage.xaml.cs">
       <DependentUpon>TeamEditorPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UIEnfrentamentsWestern.xaml.cs">
+      <DependentUpon>UIEnfrentamentsWestern.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UIPlayer.xaml.cs">
       <DependentUpon>UIPlayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UIPlayOffEquipFinals.xaml.cs">
+      <DependentUpon>UIPlayOffEquipFinals.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -289,6 +295,7 @@
     <Content Include="Assets\nba_images\teams\WAS.svg" />
     <Content Include="Assets\nba_images\wood_right.png" />
     <Content Include="Assets\nba_logo.png" />
+    <Content Include="Assets\plantilla.PNG" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-125.png" />
     <Content Include="Assets\SplashScreen.scale-150.png" />
@@ -325,7 +332,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UIEnfrentamentsWestern.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UIPlayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UIPlayOffEquipFinals.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

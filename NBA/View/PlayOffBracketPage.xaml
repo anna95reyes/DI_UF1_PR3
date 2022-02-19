@@ -4,11 +4,190 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:NBA.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:wctprimitives="using:Microsoft.Toolkit.Uwp.UI.Controls.Primitives"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="Page_Loaded">
 
-    <Grid Background="LightGreen">
+    <Grid Background="#FF073763">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Image Source="/Assets/NBA-logo.png" Grid.Row="0" HorizontalAlignment="Left" Margin="80 -10" Height="100"/>
+        <!-- Pagina -->
+        <Grid Grid.Row="1" Margin="10" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
 
+            <!-- Part superior -->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Margin="30 10" Text="Western conference" VerticalAlignment="Center" 
+                           HorizontalAlignment="Left" FontSize="20" FontWeight="Bold"/>
+                <ComboBox x:Name="cbxNbaSeason" Grid.Column="1" Margin="20 10" FontSize="24"
+                          VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                <Image Grid.Column="2" Height="80" Margin="20 10" VerticalAlignment="Center"
+                       HorizontalAlignment="Left">
+                    <Image.Source>
+                        <SvgImageSource UriSource="/Assets/nba_images/playoffs.svg"
+                                         RasterizePixelHeight="183" RasterizePixelWidth="489"/>
+                    </Image.Source>
+                </Image>
+                <TextBlock Grid.Column="3" Margin="30 10" Text="Eastern conference" VerticalAlignment="Center"
+                           HorizontalAlignment="Right" FontSize="20" FontWeight="Bold"/>
+            </Grid>
+
+            <!-- Part central -->
+            <Grid Grid.Row="1" Margin="30 10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Assets/plantilla.PNG" Grid.Row="0" Grid.Column="0" 
+                       Grid.ColumnSpan="7" Grid.RowSpan="8" Stretch="Fill" MaxHeight="500"/>
+                <local:UIEnfrentamentsWestern Grid.Row="0" Grid.Column="0" Margin="0 -22 0 0"></local:UIEnfrentamentsWestern>
+                <local:UIEnfrentamentsWestern Grid.Row="1" Grid.Column="0" Margin="0 -49 0 0"></local:UIEnfrentamentsWestern>
+            </Grid>
+
+            <!-- Part inferior -->
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="70 20">
+                    <local:UIPlayOffEquipFinals Height="150"/>
+                    <TextBlock Text="VS" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <local:UIPlayOffEquipFinals Height="150"/>
+                </StackPanel>
+
+
+                <controls:DataGrid x:Name="dgrGames" Grid.Column="1" Margin="10" MaxHeight="270"
+                                   AutoGenerateColumns="False" CanUserSortColumns="False" IsReadOnly="True"
+                                   GridLinesVisibility="None">
+
+                    <controls:DataGrid.Columns>
+
+                        <controls:DataGridTextColumn Header="Game Date" Binding="{Binding SGameDate}" 
+                                                     Width="160" FontSize="16">
+                            <controls:DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="wctprimitives:DataGridColumnHeader">
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="FontSize" Value="20" />
+                                    <Setter Property="Foreground" Value="Black" />
+                                </Style>
+                            </controls:DataGridTextColumn.HeaderStyle>
+                        </controls:DataGridTextColumn>
+
+                        <controls:DataGridTemplateColumn Header="Home team">
+                            <controls:DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Height="40" Margin="10">
+                                        <Image.Source>
+                                            <SvgImageSource UriSource="{Binding HomeTeam}"
+                                            RasterizePixelHeight="400" RasterizePixelWidth="400" />
+                                        </Image.Source>
+                                    </Image>
+                                </DataTemplate>
+                            </controls:DataGridTemplateColumn.CellTemplate>
+                            <controls:DataGridTemplateColumn.HeaderStyle>
+                                <Style TargetType="wctprimitives:DataGridColumnHeader">
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="FontSize" Value="20" />
+                                    <Setter Property="Foreground" Value="Black" />
+                                </Style>
+                            </controls:DataGridTemplateColumn.HeaderStyle>
+                        </controls:DataGridTemplateColumn>
+
+                        <controls:DataGridTextColumn Header="Home score" Binding="{Binding HomeScore}" 
+                                                     Width="160" FontSize="16">
+                            <controls:DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="wctprimitives:DataGridColumnHeader">
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="FontSize" Value="20" />
+                                    <Setter Property="Foreground" Value="Black" />
+                                </Style>
+                            </controls:DataGridTextColumn.HeaderStyle>
+                        </controls:DataGridTextColumn>
+
+                        <controls:DataGridTextColumn Header="Away score" Binding="{Binding AwayScore}" 
+                                                     Width="160" FontSize="16">
+                            <controls:DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="wctprimitives:DataGridColumnHeader">
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="FontSize" Value="20" />
+                                    <Setter Property="Foreground" Value="Black" />
+                                </Style>
+                            </controls:DataGridTextColumn.HeaderStyle>
+                        </controls:DataGridTextColumn>
+
+                        <controls:DataGridTemplateColumn Header="Away team">
+                            <controls:DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image  Height="40" Margin="10">
+                                        <Image.Source>
+                                            <SvgImageSource UriSource="{Binding AwayTeam}"
+                                            RasterizePixelHeight="400" RasterizePixelWidth="400" />
+                                        </Image.Source>
+                                    </Image>
+                                </DataTemplate>
+                            </controls:DataGridTemplateColumn.CellTemplate>
+                            <controls:DataGridTemplateColumn.HeaderStyle>
+                                <Style TargetType="wctprimitives:DataGridColumnHeader">
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="FontSize" Value="20" />
+                                    <Setter Property="Foreground" Value="Black" />
+                                </Style>
+                            </controls:DataGridTemplateColumn.HeaderStyle>
+                        </controls:DataGridTemplateColumn>
+
+                        <controls:DataGridTemplateColumn Header="Recap">
+                            <controls:DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WebView Source="{Binding Recap}" Height="80" Width="80" />
+                                </DataTemplate>
+                            </controls:DataGridTemplateColumn.CellTemplate>
+                            <controls:DataGridTemplateColumn.HeaderStyle>
+                                <Style TargetType="wctprimitives:DataGridColumnHeader">
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="FontSize" Value="20" />
+                                    <Setter Property="Foreground" Value="Black" />
+                                </Style>
+                            </controls:DataGridTemplateColumn.HeaderStyle>
+                        </controls:DataGridTemplateColumn>
+
+
+                    </controls:DataGrid.Columns>
+                </controls:DataGrid>
+
+
+            </Grid>
+        </Grid>
     </Grid>
 </Page>
