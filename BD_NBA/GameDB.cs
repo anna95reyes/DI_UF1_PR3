@@ -5,7 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace NBA_BD
 {
@@ -52,6 +54,7 @@ namespace NBA_BD
                             String recap = readerStringOrNull(reader, ordinals["recap"], "");
 
                             Game g = new Game(game_date, home_team, home_score, away_score, away_team, recap);
+
                             games.Add(g);
                         }
                     }
@@ -60,6 +63,19 @@ namespace NBA_BD
             return games;
         }
 
+        public static string GetYouTubeId(string url)
+        {
+            var regex = @"(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?|watch)\/|.*[?&amp;]v=)|youtu\.be\/)([^""&amp;?\/ ]{11})";
+
+            var match = Regex.Match(url, regex);
+
+            if (match.Success)
+            {
+                return match.Groups[1].Value;
+            }
+
+            return url;
+        }
 
         private static string readerStringOrNull(DbDataReader reader, int ordinal, String valorPerDefecte)
         {
@@ -70,6 +86,5 @@ namespace NBA_BD
             }
             return value;
         }
-
     }
 }

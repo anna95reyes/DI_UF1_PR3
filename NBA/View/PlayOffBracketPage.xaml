@@ -90,7 +90,7 @@
 
                 <controls:DataGrid x:Name="dgrGames" Grid.Column="1" Margin="10" MaxHeight="270"
                                    AutoGenerateColumns="False" CanUserSortColumns="False" IsReadOnly="True"
-                                   GridLinesVisibility="None">
+                                   GridLinesVisibility="None" Width="880">
 
                     <controls:DataGrid.Columns>
 
@@ -131,7 +131,7 @@
                                 <Style TargetType="wctprimitives:DataGridColumnHeader">
                                     <Setter Property="FontWeight" Value="Bold" />
                                     <Setter Property="FontSize" Value="20" />
-                                    <Setter Property="Foreground" Value="Black" />
+                                    <Setter Property="Foreground" Value="Black"/>
                                 </Style>
                             </controls:DataGridTextColumn.HeaderStyle>
                         </controls:DataGridTextColumn>
@@ -170,7 +170,7 @@
                         <controls:DataGridTemplateColumn Header="Recap">
                             <controls:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <WebView Source="{Binding Recap}" Height="80" Width="80" />
+                                    <WebView Height="80" Width="80" local:PlayOffBracketPage.SourceString="{Binding}"/>
                                 </DataTemplate>
                             </controls:DataGridTemplateColumn.CellTemplate>
                             <controls:DataGridTemplateColumn.HeaderStyle>
