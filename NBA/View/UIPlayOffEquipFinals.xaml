@@ -17,21 +17,21 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0">
-            <TextBlock x:Name="txbNomEquip" Text="San Antonio Spurs"/>
-            <TextBlock x:Name="txbPosicioEquip" Margin="5 0 0 0" Text="(1)"/>
+            <TextBlock x:Name="txbNomEquip"/>
+            <TextBlock x:Name="txbSeedEquip" Margin="5 0 0 0"/>
         </StackPanel>
 
         <Image Grid.Row="1" Height="100" VerticalAlignment="Center"
                HorizontalAlignment="Center">
             <Image.Source>
-                <SvgImageSource UriSource="/Assets/nba_images/teams/SAS.svg"
+                <SvgImageSource x:Name="imgLogoTeam"
                                 RasterizePixelHeight="400" RasterizePixelWidth="400"/>
             </Image.Source>
         </Image>
 
-        <Border x:Name="brdEquip" Grid.Row="2" Background="#FFEA9999" >
-            <TextBlock x:Name="txbPuntuacioEquip" Text="4" HorizontalAlignment="Center"
-                       VerticalAlignment="Center" Foreground="White"/>
+        <Border x:Name="brdEquip" Grid.Row="2">
+            <TextBlock x:Name="txbPuntuacioEquip" HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
         </Border>
     </Grid>
 </UserControl>

@@ -135,5 +135,47 @@ namespace NBA.View
             return url;
         }
 
+        private void cbxNbaSeason_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbxNbaSeason.SelectedItem != null)
+            {
+                Season s = (Season)cbxNbaSeason.SelectedItem;
+                ObservableCollection<PlayOff> plays = PlayOffDB.GetLlistaSeasons(s.Caption, 4, "");
+
+                if (plays.Count > 0)
+                {
+                    uiFinalsWestern.EsGuanyador = plays[0].FirstTeamWins > plays[0].SecondTeamWins;
+                    uiFinalsWestern.NomTeam = plays[0].FirstTeamName;
+                    uiFinalsWestern.SeedTeam = plays[0].SeedFirstTeam;
+                    uiFinalsWestern.LogoTeam = rutaImgAppData(plays[0].FirstTeamLogo);
+                    uiFinalsWestern.WinsTeam = plays[0].FirstTeamWins;
+
+                    txbVS.Text = "VS";
+
+                    uiFinalsEastern.EsGuanyador = plays[0].SecondTeamWins > plays[0].FirstTeamWins;
+                    uiFinalsEastern.NomTeam = plays[0].SecondTeamName;
+                    uiFinalsEastern.SeedTeam = plays[0].SeedSecondTeam;
+                    uiFinalsEastern.LogoTeam = rutaImgAppData(plays[0].SecondTeamLogo);
+                    uiFinalsEastern.WinsTeam = plays[0].SecondTeamWins;
+                } 
+                else
+                {
+                    uiFinalsWestern.EsGuanyador = false;
+                    uiFinalsWestern.NomTeam = null;
+                    uiFinalsWestern.SeedTeam = 0;
+                    uiFinalsWestern.LogoTeam = null;
+                    uiFinalsWestern.WinsTeam = 0;
+
+                    txbVS.Text = "";
+
+                    uiFinalsEastern.EsGuanyador = false;
+                    uiFinalsEastern.NomTeam = null;
+                    uiFinalsEastern.SeedTeam = 0;
+                    uiFinalsEastern.LogoTeam = null;
+                    uiFinalsEastern.WinsTeam = 0;
+                }
+            
+            }
+        }
     }
 }

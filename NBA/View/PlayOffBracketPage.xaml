@@ -36,7 +36,7 @@
                 <TextBlock Grid.Column="0" Margin="30 10" Text="Western conference" VerticalAlignment="Center" 
                            HorizontalAlignment="Left" FontSize="20" FontWeight="Bold"/>
                 <ComboBox x:Name="cbxNbaSeason" Grid.Column="1" Margin="20 10" FontSize="24"
-                          VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                          VerticalAlignment="Center" HorizontalAlignment="Stretch" SelectionChanged="cbxNbaSeason_SelectionChanged"/>
                 <Image Grid.Column="2" Height="80" Margin="20 10" VerticalAlignment="Center"
                        HorizontalAlignment="Left">
                     <Image.Source>
@@ -82,9 +82,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="70 20">
-                    <local:UIPlayOffEquipFinals Height="150"/>
-                    <TextBlock Text="VS" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <local:UIPlayOffEquipFinals Height="150"/>
+                    <local:UIPlayOffEquipFinals x:Name="uiFinalsWestern" Height="150"/>
+                    <TextBlock x:Name="txbVS" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <local:UIPlayOffEquipFinals x:Name="uiFinalsEastern" Height="150"/>
                 </StackPanel>
 
 

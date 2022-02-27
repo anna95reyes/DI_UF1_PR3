@@ -63,20 +63,6 @@ namespace NBA_BD
             return games;
         }
 
-        public static string GetYouTubeId(string url)
-        {
-            var regex = @"(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?|watch)\/|.*[?&amp;]v=)|youtu\.be\/)([^""&amp;?\/ ]{11})";
-
-            var match = Regex.Match(url, regex);
-
-            if (match.Success)
-            {
-                return match.Groups[1].Value;
-            }
-
-            return url;
-        }
-
         private static string readerStringOrNull(DbDataReader reader, int ordinal, String valorPerDefecte)
         {
             string value = valorPerDefecte;
