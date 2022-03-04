@@ -21,7 +21,7 @@
         <Grid Grid.Row="1" Margin="10" Background="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
@@ -50,29 +50,65 @@
 
             <!-- Part central -->
             <Grid Grid.Row="1" Margin="30 10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="1.5*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Image Source="/Assets/plantilla.PNG" Grid.Row="0" Grid.Column="0" 
-                       Grid.ColumnSpan="7" Grid.RowSpan="8" Stretch="Fill" MaxHeight="500"/>
-                <local:UIEnfrentamentsWestern Grid.Row="0" Grid.Column="0" Margin="0 -22 0 0"></local:UIEnfrentamentsWestern>
-                <local:UIEnfrentamentsWestern Grid.Row="1" Grid.Column="0" Margin="0 -49 0 0"></local:UIEnfrentamentsWestern>
+                <Image Source="/Assets/plantilla.PNG" Stretch="Fill" Height="500"/>
+                <Grid Height="500">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="1.5*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf1Local"    Grid.Row="0" Grid.Column="0" Margin="0 0 -5 0"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf1Visitant" Grid.Row="1" Grid.Column="0" Margin="0 0 -5 0"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf2Local"    Grid.Row="2" Grid.Column="0" Margin="0 0 -5 0"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf2Visitant" Grid.Row="3" Grid.Column="0" Margin="0 0 -5 5"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf3Local"    Grid.Row="4" Grid.Column="0" Margin="0 0 -5 10"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf3Visitant" Grid.Row="5" Grid.Column="0" Margin="0 0 -5 10"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf4Local"    Grid.Row="6" Grid.Column="0" Margin="0 0 -5 0"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf4Visitant" Grid.Row="7" Grid.Column="0" Margin="0 0 -5 10"></local:UIEnfrentamentsWestern>
+
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound2Enf1Local"    Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Margin="0 0 5 0"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound2Enf1Visitant" Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" Margin="0 0 5 0"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound2Enf2Local"    Grid.Row="4" Grid.Column="1" Grid.RowSpan="2" Margin="0 0 5 0"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound2Enf2Visitant" Grid.Row="6" Grid.Column="1" Grid.RowSpan="2" Margin="0 0 5 0"></local:UIEnfrentamentsWestern>
+
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound3Enf1Local"    Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Margin="0 0 15 0"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound3Enf1Visitant" Grid.Row="5" Grid.Column="2" Grid.RowSpan="2" Margin="0 0 15 5"></local:UIEnfrentamentsWestern>
+
+                    <local:UIEnfrentamentsFinals x:Name="uiFinalsLocal"    Grid.Row="3" Grid.Column="3" Margin="0" HorizontalAlignment="Center"></local:UIEnfrentamentsFinals>
+                    <local:UIEnfrentamentsFinals x:Name="uiFinalsVisitant" Grid.Row="4" Grid.Column="3" Margin="0"  HorizontalAlignment="Center"></local:UIEnfrentamentsFinals>
+
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound3Enf1Local"    Grid.Row="1" Grid.Column="4" Grid.RowSpan="2" Margin="12 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound3Enf1Visitant" Grid.Row="5" Grid.Column="4" Grid.RowSpan="2" Margin="12 0 0 5"></local:UIEnfrentamentsEastern>
+
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound2Enf1Local"    Grid.Row="0" Grid.Column="5" Grid.RowSpan="2" Margin="2 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound2Enf1Visitant" Grid.Row="2" Grid.Column="5" Grid.RowSpan="2" Margin="2 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound2Enf2Local"    Grid.Row="4" Grid.Column="5" Grid.RowSpan="2" Margin="2 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound2Enf2Visitant" Grid.Row="6" Grid.Column="5" Grid.RowSpan="2" Margin="2 0 0 0"></local:UIEnfrentamentsEastern>
+
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf1Local"    Grid.Row="0" Grid.Column="6" Margin="-7 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf1Visitant" Grid.Row="1" Grid.Column="6" Margin="-7 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf2Local"    Grid.Row="2" Grid.Column="6" Margin="-7 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf2Visitant" Grid.Row="3" Grid.Column="6" Margin="-7 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf3Local"    Grid.Row="4" Grid.Column="6" Margin="-7 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf3Visitant" Grid.Row="5" Grid.Column="6" Margin="-7 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf4Local"    Grid.Row="6" Grid.Column="6" Margin="-7 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf4Visitant" Grid.Row="7" Grid.Column="6" Margin="-7 0 0 10"></local:UIEnfrentamentsEastern>
+                </Grid>
             </Grid>
 
             <!-- Part inferior -->
@@ -82,9 +118,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="70 20">
-                    <local:UIPlayOffEquipFinals x:Name="uiFinalsWestern" Height="150"/>
+                    <local:UIPlayOffEquip x:Name="uiWestern" Height="150"/>
                     <TextBlock x:Name="txbVS" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <local:UIPlayOffEquipFinals x:Name="uiFinalsEastern" Height="150"/>
+                    <local:UIPlayOffEquip x:Name="uiEastern" Height="150"/>
                 </StackPanel>
 
 

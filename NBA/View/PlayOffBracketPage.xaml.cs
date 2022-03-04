@@ -43,15 +43,6 @@ namespace NBA.View
         {
             cbxNbaSeason.ItemsSource = SeasonDB.GetLlistaSeasons();
             cbxNbaSeason.SelectedIndex = 0;
-
-            games = GameDB.GetLlistGames();
-            for (int i = 0; i < games.Count; i++)
-            {
-                games[i].HomeTeam = rutaImgAppData(games[i].HomeTeam);
-                games[i].AwayTeam = rutaImgAppData(games[i].AwayTeam);
-            }
-            dgrGames.ItemsSource = games;
-
         }
 
         private String rutaImgAppData(string ruta)
@@ -141,41 +132,56 @@ namespace NBA.View
             {
                 Season s = (Season)cbxNbaSeason.SelectedItem;
                 ObservableCollection<PlayOff> plays = PlayOffDB.GetLlistaSeasons(s.Caption, 4, "");
+                EnfrontamentSeleccionat(s, plays);
 
-                if (plays.Count > 0)
-                {
-                    uiFinalsWestern.EsGuanyador = plays[0].FirstTeamWins > plays[0].SecondTeamWins;
-                    uiFinalsWestern.NomTeam = plays[0].FirstTeamName;
-                    uiFinalsWestern.SeedTeam = plays[0].SeedFirstTeam;
-                    uiFinalsWestern.LogoTeam = rutaImgAppData(plays[0].FirstTeamLogo);
-                    uiFinalsWestern.WinsTeam = plays[0].FirstTeamWins;
-
-                    txbVS.Text = "VS";
-
-                    uiFinalsEastern.EsGuanyador = plays[0].SecondTeamWins > plays[0].FirstTeamWins;
-                    uiFinalsEastern.NomTeam = plays[0].SecondTeamName;
-                    uiFinalsEastern.SeedTeam = plays[0].SeedSecondTeam;
-                    uiFinalsEastern.LogoTeam = rutaImgAppData(plays[0].SecondTeamLogo);
-                    uiFinalsEastern.WinsTeam = plays[0].SecondTeamWins;
-                } 
-                else
-                {
-                    uiFinalsWestern.EsGuanyador = false;
-                    uiFinalsWestern.NomTeam = null;
-                    uiFinalsWestern.SeedTeam = 0;
-                    uiFinalsWestern.LogoTeam = null;
-                    uiFinalsWestern.WinsTeam = 0;
-
-                    txbVS.Text = "";
-
-                    uiFinalsEastern.EsGuanyador = false;
-                    uiFinalsEastern.NomTeam = null;
-                    uiFinalsEastern.SeedTeam = 0;
-                    uiFinalsEastern.LogoTeam = null;
-                    uiFinalsEastern.WinsTeam = 0;
-                }
-            
             }
         }
+
+        private void EnfrontamentSeleccionat(Season s, ObservableCollection<PlayOff> plays)
+        {
+            if (plays.Count > 0)
+            {
+
+                UIEnfrentaments(uiWestern, plays[0].FirstTeamWins > plays[0].SecondTeamWins, plays[0].FirstTeamName,
+                    plays[0].SeedFirstTeam, rutaImgAppData(plays[0].FirstTeamLogo), plays[0].FirstTeamWins);
+
+                txbVS.Text = "VS";
+
+                UIEnfrentaments(uiEastern, plays[0].SecondTeamWins > plays[0].FirstTeamWins, plays[0].SecondTeamName,
+                    plays[0].SeedSecondTeam, rutaImgAppData(plays[0].SecondTeamLogo), plays[0].SecondTeamWins);
+
+
+                games = GameDB.GetLlistGames(s.Caption, 4, plays[0].FirstTeamName, plays[0].SecondTeamName);
+                for (int i = 0; i < games.Count; i++)
+                {
+                    games[i].HomeTeam = rutaImgAppData(games[i].HomeTeam);
+                    games[i].AwayTeam = rutaImgAppData(games[i].AwayTeam);
+                }
+                dgrGames.ItemsSource = games;
+
+            }
+            else
+            {
+
+                UIEnfrentaments(uiWestern, false, null, 0, null, 0);
+
+                txbVS.Text = "";
+
+                UIEnfrentaments(uiEastern, false, null, 0, null, 0);
+
+                dgrGames.ItemsSource = null;
+            }
+        }
+
+        private void UIEnfrentaments(UIPlayOffEquip ui, bool esGuanyador, string teamName, int teamSeed, string teamLogo, int teamWins)
+        {
+            ui.EsGuanyador = esGuanyador;
+            ui.NomTeam = teamName;
+            ui.SeedTeam = teamSeed;
+            ui.LogoTeam = teamLogo;
+            ui.WinsTeam = teamWins;
+        }
+
+
     }
 }

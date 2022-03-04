@@ -18,9 +18,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace NBA.View
 {
-    public sealed partial class UIPlayOffEquipFinals : UserControl
+    public sealed partial class UIPlayOffEquip : UserControl
     {
-        public UIPlayOffEquipFinals()
+        public UIPlayOffEquip()
         {
             this.InitializeComponent();
         }
@@ -35,7 +35,7 @@ namespace NBA.View
 
         // Using a DependencyProperty as the backing store for EsGuanyador.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty EsGuanyadorProperty =
-            DependencyProperty.Register("EsGuanyador", typeof(Boolean), typeof(UIPlayOffEquipFinals), new PropertyMetadata(false, PlayOffEquipFinalsChangedCallbackStatic));
+            DependencyProperty.Register("EsGuanyador", typeof(Boolean), typeof(UIPlayOffEquip), new PropertyMetadata(false, PlayOffEquipFinalsChangedCallbackStatic));
 
 
 
@@ -47,7 +47,7 @@ namespace NBA.View
 
         // Using a DependencyProperty as the backing store for NomTeam.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty NomTeamProperty =
-            DependencyProperty.Register("NomTeam", typeof(String), typeof(UIPlayOffEquipFinals), new PropertyMetadata(null, PlayOffEquipFinalsChangedCallbackStatic));
+            DependencyProperty.Register("NomTeam", typeof(String), typeof(UIPlayOffEquip), new PropertyMetadata(null, PlayOffEquipFinalsChangedCallbackStatic));
 
 
 
@@ -60,7 +60,7 @@ namespace NBA.View
 
         // Using a DependencyProperty as the backing store for LogoTeam.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LogoTeamProperty =
-            DependencyProperty.Register("LogoTeam", typeof(String), typeof(UIPlayOffEquipFinals), new PropertyMetadata(null, PlayOffEquipFinalsChangedCallbackStatic));
+            DependencyProperty.Register("LogoTeam", typeof(String), typeof(UIPlayOffEquip), new PropertyMetadata(null, PlayOffEquipFinalsChangedCallbackStatic));
 
 
 
@@ -73,7 +73,7 @@ namespace NBA.View
 
         // Using a DependencyProperty as the backing store for SeedTeam.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SeedTeamProperty =
-            DependencyProperty.Register("SeedTeam", typeof(int), typeof(UIPlayOffEquipFinals), new PropertyMetadata(0, PlayOffEquipFinalsChangedCallbackStatic));
+            DependencyProperty.Register("SeedTeam", typeof(int), typeof(UIPlayOffEquip), new PropertyMetadata(0, PlayOffEquipFinalsChangedCallbackStatic));
 
 
 
@@ -86,14 +86,14 @@ namespace NBA.View
 
         // Using a DependencyProperty as the backing store for WinsTeam.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty WinsTeamProperty =
-            DependencyProperty.Register("WinsTeam", typeof(int), typeof(UIPlayOffEquipFinals), new PropertyMetadata(0, PlayOffEquipFinalsChangedCallbackStatic));
+            DependencyProperty.Register("WinsTeam", typeof(int), typeof(UIPlayOffEquip), new PropertyMetadata(0, PlayOffEquipFinalsChangedCallbackStatic));
 
 
 
 
         private static void PlayOffEquipFinalsChangedCallbackStatic(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            UIPlayOffEquipFinals poef = (UIPlayOffEquipFinals)d;
+            UIPlayOffEquip poef = (UIPlayOffEquip)d;
             poef.PlayOffEquipFinalsChangedCallback(d, e);
         }
 

@@ -132,14 +132,20 @@
     <Compile Include="View\TeamEditorPage.xaml.cs">
       <DependentUpon>TeamEditorPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UIEnfrentamentsFinals.xaml.cs">
+      <DependentUpon>UIEnfrentamentsFinals.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UIEnfrentamentsEastern.xaml.cs">
+      <DependentUpon>UIEnfrentamentsEastern.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UIEnfrentamentsWestern.xaml.cs">
       <DependentUpon>UIEnfrentamentsWestern.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UIPlayer.xaml.cs">
       <DependentUpon>UIPlayer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UIPlayOffEquipFinals.xaml.cs">
-      <DependentUpon>UIPlayOffEquipFinals.xaml</DependentUpon>
+    <Compile Include="View\UIPlayOffEquip.xaml.cs">
+      <DependentUpon>UIPlayOffEquip.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -256,6 +262,7 @@
     <Content Include="Assets\nba_images\flags\tr.svg" />
     <Content Include="Assets\nba_images\flags\ua.svg" />
     <Content Include="Assets\nba_images\flags\us.svg" />
+    <Content Include="Assets\nba_images\larry.PNG" />
     <Content Include="Assets\nba_images\larry.svg" />
     <Content Include="Assets\nba_images\map\m1.png" />
     <Content Include="Assets\nba_images\map\m2.png" />
@@ -332,6 +339,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UIEnfrentamentsFinals.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\UIEnfrentamentsEastern.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\UIEnfrentamentsWestern.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -340,7 +355,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UIPlayOffEquipFinals.xaml">
+    <Page Include="View\UIPlayOffEquip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
