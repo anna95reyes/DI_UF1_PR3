@@ -16,21 +16,21 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="1" Margin="10 0" VerticalAlignment="Center" Grid.Column="0" FontSize="20"/>
+        <TextBlock x:Name="txbSeedEquip" Margin="10 0" VerticalAlignment="Center" Grid.Column="0" FontSize="20"/>
 
         <Grid  Grid.Column="1">
-            <Image Source="/Assets/nba_images/larry.PNG" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Visible"/>
+            <Image x:Name="imgTeamGuanyador" Source="/Assets/nba_images/larry.PNG" VerticalAlignment="Center" 
+                   HorizontalAlignment="Center" Visibility="Collapsed"/>
 
             <Image Height="40" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Image.Source>
-                    <SvgImageSource UriSource="/Assets/nba_images/teams/ATL.svg"
-                                                 RasterizePixelHeight="400" RasterizePixelWidth="400"/>
+                    <SvgImageSource x:Name="imgLogoTeam" RasterizePixelHeight="400" RasterizePixelWidth="400"/>
                 </Image.Source>
             </Image>
         </Grid>
 
-        <Border Background="LightGreen" CornerRadius="10" Height="22" Width="22"  Grid.Column="2" HorizontalAlignment="left" Margin="10">
-            <TextBlock Text="1" Margin="0 -2 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Foreground="White"/>
+        <Border x:Name="brdEquip" CornerRadius="10" Height="22" Width="22"  Grid.Column="2" HorizontalAlignment="left" Margin="10">
+            <TextBlock x:Name="txbPuntuacioEquip" Margin="0 -2 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Foreground="White"/>
         </Border>
         
     </Grid>

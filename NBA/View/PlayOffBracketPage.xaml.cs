@@ -33,6 +33,7 @@ namespace NBA.View
 
         StorageFolder appDataFolder = ApplicationData.Current.LocalFolder;
         ObservableCollection<Game> games;
+        ObservableCollection<PlayOff> plays;
 
         public PlayOffBracketPage()
         {
@@ -131,27 +132,115 @@ namespace NBA.View
             if (cbxNbaSeason.SelectedItem != null)
             {
                 Season s = (Season)cbxNbaSeason.SelectedItem;
-                ObservableCollection<PlayOff> plays = PlayOffDB.GetLlistaSeasons(s.Caption, 4, "");
-                EnfrontamentSeleccionat(s, plays);
 
+                plays = PlayOffDB.GetLlistaSeasons(s.Caption, 1, "Western");
+                if (plays.Count == 4)
+                {
+                    Enfrentament(uiWesternRound1Enf1Local, uiWesternRound1Enf1Visitant, plays[0]);
+                    Enfrentament(uiWesternRound1Enf2Local, uiWesternRound1Enf2Visitant, plays[1]);
+                    Enfrentament(uiWesternRound1Enf3Local, uiWesternRound1Enf3Visitant, plays[2]);
+                    Enfrentament(uiWesternRound1Enf4Local, uiWesternRound1Enf4Visitant, plays[3]);
+                } 
+                else
+                {
+                    Enfrentament(uiWesternRound1Enf1Local, uiWesternRound1Enf1Visitant, null);
+                    Enfrentament(uiWesternRound1Enf2Local, uiWesternRound1Enf2Visitant, null);
+                    Enfrentament(uiWesternRound1Enf3Local, uiWesternRound1Enf3Visitant, null);
+                    Enfrentament(uiWesternRound1Enf4Local, uiWesternRound1Enf4Visitant, null);
+                }
+
+                plays = PlayOffDB.GetLlistaSeasons(s.Caption, 2, "Western");
+                if (plays.Count == 2)
+                {
+                    Enfrentament(uiWesternRound2Enf1Local, uiWesternRound2Enf1Visitant, plays[0]);
+                    Enfrentament(uiWesternRound2Enf2Local, uiWesternRound2Enf2Visitant, plays[1]);
+                }
+                else
+                {
+                    Enfrentament(uiWesternRound2Enf1Local, uiWesternRound2Enf1Visitant, null);
+                    Enfrentament(uiWesternRound2Enf2Local, uiWesternRound2Enf2Visitant, null);
+                }
+
+                plays = PlayOffDB.GetLlistaSeasons(s.Caption, 3, "Western");
+                if (plays.Count == 1)
+                {
+                    Enfrentament(uiWesternRound3Enf1Local, uiWesternRound3Enf1Visitant, plays[0]);
+                }
+                else
+                {
+                    Enfrentament(uiWesternRound3Enf1Local, uiWesternRound3Enf1Visitant, null);
+                }
+
+                plays = PlayOffDB.GetLlistaSeasons(s.Caption, 4, "");
+                if (plays.Count == 1)
+                {
+                    Enfrentament(uiFinalsLocal, uiFinalsVisitant, plays[0]);
+                    EnfrontamentSeleccionat(s, plays[0], 4); //TODO: AIXO NO VA AQUI
+                } 
+                else
+                {
+                    Enfrentament(uiFinalsLocal, uiFinalsVisitant, null);
+                }
+
+                plays = PlayOffDB.GetLlistaSeasons(s.Caption, 3, "Eastern");
+                if (plays.Count == 1)
+                {
+                    Enfrentament(uiEasternRound3Enf1Local, uiEasternRound3Enf1Visitant, plays[0]);
+                }
+                else
+                {
+                    Enfrentament(uiEasternRound3Enf1Local, uiEasternRound3Enf1Visitant, null);
+                }
+
+                plays = PlayOffDB.GetLlistaSeasons(s.Caption, 2, "Eastern");
+                if (plays.Count == 2)
+                {
+                    Enfrentament(uiEasternRound2Enf1Local, uiEasternRound2Enf1Visitant, plays[0]);
+                    Enfrentament(uiEasternRound2Enf2Local, uiEasternRound2Enf2Visitant, plays[1]);
+                } 
+                else
+                {
+                    Enfrentament(uiEasternRound2Enf1Local, uiEasternRound2Enf1Visitant, null);
+                    Enfrentament(uiEasternRound2Enf2Local, uiEasternRound2Enf2Visitant, null);
+                }
+
+                plays = PlayOffDB.GetLlistaSeasons(s.Caption, 1, "Eastern");
+                if (plays.Count == 4)
+                {
+                    Enfrentament(uiEasternRound1Enf1Local, uiEasternRound1Enf1Visitant, plays[0]);
+                    Enfrentament(uiEasternRound1Enf2Local, uiEasternRound1Enf2Visitant, plays[1]);
+                    Enfrentament(uiEasternRound1Enf3Local, uiEasternRound1Enf3Visitant, plays[2]);
+                    Enfrentament(uiEasternRound1Enf4Local, uiEasternRound1Enf4Visitant, plays[3]);
+                } 
+                else
+                {
+                    Enfrentament(uiEasternRound1Enf1Local, uiEasternRound1Enf1Visitant, null);
+                    Enfrentament(uiEasternRound1Enf2Local, uiEasternRound1Enf2Visitant, null);
+                    Enfrentament(uiEasternRound1Enf3Local, uiEasternRound1Enf3Visitant, null);
+                    Enfrentament(uiEasternRound1Enf4Local, uiEasternRound1Enf4Visitant, null);
+                }
+
+                plays = null;
             }
         }
 
-        private void EnfrontamentSeleccionat(Season s, ObservableCollection<PlayOff> plays)
+        
+
+        private void EnfrontamentSeleccionat(Season s, PlayOff play, int round)
         {
-            if (plays.Count > 0)
+            if (play != null)
             {
 
-                UIEnfrentaments(uiWestern, plays[0].FirstTeamWins > plays[0].SecondTeamWins, plays[0].FirstTeamName,
-                    plays[0].SeedFirstTeam, rutaImgAppData(plays[0].FirstTeamLogo), plays[0].FirstTeamWins);
+                UIEnfrentamentsSeleccionat(uiWestern, play.FirstTeamWins > play.SecondTeamWins, play.FirstTeamName,
+                    play.SeedFirstTeam, rutaImgAppData(play.FirstTeamLogo), play.FirstTeamWins);
 
                 txbVS.Text = "VS";
 
-                UIEnfrentaments(uiEastern, plays[0].SecondTeamWins > plays[0].FirstTeamWins, plays[0].SecondTeamName,
-                    plays[0].SeedSecondTeam, rutaImgAppData(plays[0].SecondTeamLogo), plays[0].SecondTeamWins);
+                UIEnfrentamentsSeleccionat(uiEastern, play.SecondTeamWins > play.FirstTeamWins, play.SecondTeamName,
+                    play.SeedSecondTeam, rutaImgAppData(play.SecondTeamLogo), play.SecondTeamWins);
 
 
-                games = GameDB.GetLlistGames(s.Caption, 4, plays[0].FirstTeamName, plays[0].SecondTeamName);
+                games = GameDB.GetLlistGames(s.Caption, round, play.FirstTeamName, play.SecondTeamName);
                 for (int i = 0; i < games.Count; i++)
                 {
                     games[i].HomeTeam = rutaImgAppData(games[i].HomeTeam);
@@ -163,17 +252,17 @@ namespace NBA.View
             else
             {
 
-                UIEnfrentaments(uiWestern, false, null, 0, null, 0);
+                UIEnfrentamentsSeleccionat(uiWestern, false, null, 0, null, 0);
 
                 txbVS.Text = "";
 
-                UIEnfrentaments(uiEastern, false, null, 0, null, 0);
+                UIEnfrentamentsSeleccionat(uiEastern, false, null, 0, null, 0);
 
                 dgrGames.ItemsSource = null;
             }
         }
 
-        private void UIEnfrentaments(UIPlayOffEquip ui, bool esGuanyador, string teamName, int teamSeed, string teamLogo, int teamWins)
+        private void UIEnfrentamentsSeleccionat(UIPlayOffEquip ui, bool esGuanyador, string teamName, int teamSeed, string teamLogo, int teamWins)
         {
             ui.EsGuanyador = esGuanyador;
             ui.NomTeam = teamName;
@@ -182,6 +271,83 @@ namespace NBA.View
             ui.WinsTeam = teamWins;
         }
 
+        private void UIEnfrentaments(UIEnfrentamentsWestern ui, bool esGuanyador, int teamSeed, string teamLogo, int teamWins)
+        {
+            ui.EsGuanyador = esGuanyador;
+            ui.SeedTeam = teamSeed;
+            ui.LogoTeam = teamLogo;
+            ui.WinsTeam = teamWins;
+        }
 
+        private void UIEnfrentaments(UIEnfrentamentsEastern ui, bool esGuanyador, int teamSeed, string teamLogo, int teamWins)
+        {
+            ui.EsGuanyador = esGuanyador;
+            ui.SeedTeam = teamSeed;
+            ui.LogoTeam = teamLogo;
+            ui.WinsTeam = teamWins;
+        }
+
+        private void UIEnfrentaments(UIEnfrentamentsFinals ui, bool esGuanyador, int teamSeed, string teamLogo, int teamWins)
+        {
+            ui.EsGuanyador = esGuanyador;
+            ui.SeedTeam = teamSeed;
+            ui.LogoTeam = teamLogo;
+            ui.WinsTeam = teamWins;
+        }
+
+        private void Enfrentament(UIEnfrentamentsWestern uiLocal, UIEnfrentamentsWestern uiVisitant, PlayOff play)
+        {
+            if (play != null)
+            {
+                UIEnfrentaments(uiLocal, play.FirstTeamWins > play.SecondTeamWins,
+                                            play.SeedFirstTeam, rutaImgAppData(play.FirstTeamLogo), play.FirstTeamWins);
+                UIEnfrentaments(uiVisitant, play.SecondTeamWins > play.FirstTeamWins,
+                            play.SeedSecondTeam, rutaImgAppData(play.SecondTeamLogo), play.SecondTeamWins);
+            }
+            else
+            {
+                UIEnfrentaments(uiLocal, false, 0, null, 0);
+                UIEnfrentaments(uiVisitant, false, 0, null, 0);
+            }
+        }
+    
+
+        private void Enfrentament(UIEnfrentamentsEastern uiLocal, UIEnfrentamentsEastern uiVisitant, PlayOff play)
+        {
+            if (play != null)
+            {
+                UIEnfrentaments(uiLocal, play.FirstTeamWins > play.SecondTeamWins,
+                                            play.SeedFirstTeam, rutaImgAppData(play.FirstTeamLogo), play.FirstTeamWins);
+                UIEnfrentaments(uiVisitant, play.SecondTeamWins > play.FirstTeamWins,
+                            play.SeedSecondTeam, rutaImgAppData(play.SecondTeamLogo), play.SecondTeamWins);
+            }
+            else
+            {
+                UIEnfrentaments(uiLocal, false, 0, null, 0);
+                UIEnfrentaments(uiVisitant, false, 0, null, 0);
+            }
+        }
+    
+
+        private void Enfrentament(UIEnfrentamentsFinals uiLocal, UIEnfrentamentsFinals uiVisitant, PlayOff play)
+        {
+            if (play != null)
+            {
+                UIEnfrentaments(uiLocal, play.FirstTeamWins > play.SecondTeamWins,
+                                                play.SeedFirstTeam, rutaImgAppData(play.FirstTeamLogo), play.FirstTeamWins);
+                UIEnfrentaments(uiVisitant, play.SecondTeamWins > play.FirstTeamWins,
+                                play.SeedSecondTeam, rutaImgAppData(play.SecondTeamLogo), play.SecondTeamWins);
+            }
+            else
+            {
+                UIEnfrentaments(uiLocal, false, 0, null, 0);
+                UIEnfrentaments(uiVisitant, false, 0, null, 0);
+            }
+        }
+
+        private void uienfrentament_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
