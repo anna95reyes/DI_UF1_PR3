@@ -263,7 +263,7 @@
                     <ListView x:Name="lsvPlayers" Grid.Row="1" Background="LightGray" MaxHeight="520">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <local:UIPlayer ElPlayer="{Binding}" HorizontalAlignment="Center" Margin="65 10 0 10"/>
+                                <local:UIPlayer ElPlayer="{Binding}" Click="UIPlayer_Click" HorizontalAlignment="Center" Margin="65 10 0 10"/>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>

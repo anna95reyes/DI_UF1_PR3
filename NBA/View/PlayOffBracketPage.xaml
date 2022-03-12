@@ -72,42 +72,42 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                 
-                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf1Local"    Grid.Row="0" Grid.Column="0" Click="uienfrentament_Click" Margin="0 0 5 0"></local:UIEnfrentamentsWestern>
-                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf1Visitant" Grid.Row="1" Grid.Column="0" Click="uienfrentament_Click" Margin="0 0 5 0"></local:UIEnfrentamentsWestern>
-                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf2Local"    Grid.Row="2" Grid.Column="0" Click="uienfrentament_Click" Margin="0 0 5 0"></local:UIEnfrentamentsWestern>
-                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf2Visitant" Grid.Row="3" Grid.Column="0" Click="uienfrentament_Click" Margin="0 0 5 5"></local:UIEnfrentamentsWestern>
-                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf3Local"    Grid.Row="4" Grid.Column="0" Click="uienfrentament_Click" Margin="0 0 5 10"></local:UIEnfrentamentsWestern>
-                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf3Visitant" Grid.Row="5" Grid.Column="0" Click="uienfrentament_Click" Margin="0 0 5 10"></local:UIEnfrentamentsWestern>
-                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf4Local"    Grid.Row="6" Grid.Column="0" Click="uienfrentament_Click" Margin="0 0 5 0"></local:UIEnfrentamentsWestern>
-                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf4Visitant" Grid.Row="7" Grid.Column="0" Click="uienfrentament_Click" Margin="0 0 5 10"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf1Local"    Grid.Row="0" Grid.Column="0" Click="uiEnfrentament_Click" Margin="0 0 5 0"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf1Visitant" Grid.Row="1" Grid.Column="0" Click="uiEnfrentament_Click" Margin="0 0 5 0"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf2Local"    Grid.Row="2" Grid.Column="0" Click="uiEnfrentament_Click" Margin="0 0 5 0"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf2Visitant" Grid.Row="3" Grid.Column="0" Click="uiEnfrentament_Click" Margin="0 0 5 5"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf3Local"    Grid.Row="4" Grid.Column="0" Click="uiEnfrentament_Click" Margin="0 0 5 10"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf3Visitant" Grid.Row="5" Grid.Column="0" Click="uiEnfrentament_Click" Margin="0 0 5 10"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf4Local"    Grid.Row="6" Grid.Column="0" Click="uiEnfrentament_Click" Margin="0 0 5 0"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound1Enf4Visitant" Grid.Row="7" Grid.Column="0" Click="uiEnfrentament_Click" Margin="0 0 5 10"></local:UIEnfrentamentsWestern>
 
-                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound2Enf1Local"    Grid.Row="0" Grid.Column="1" Click="uienfrentament_Click" Grid.RowSpan="2" Margin="0 0 20 0"></local:UIEnfrentamentsWestern>
-                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound2Enf1Visitant" Grid.Row="2" Grid.Column="1" Click="uienfrentament_Click" Grid.RowSpan="2" Margin="0 0 20 0"></local:UIEnfrentamentsWestern>
-                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound2Enf2Local"    Grid.Row="4" Grid.Column="1" Click="uienfrentament_Click" Grid.RowSpan="2" Margin="0 0 20 0"></local:UIEnfrentamentsWestern>
-                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound2Enf2Visitant" Grid.Row="6" Grid.Column="1" Click="uienfrentament_Click" Grid.RowSpan="2" Margin="0 0 20 0"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound2Enf1Visitant" Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" Click="uiEnfrentament_Click" Margin="0 0 20 0"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound2Enf2Local"    Grid.Row="4" Grid.Column="1" Grid.RowSpan="2" Click="uiEnfrentament_Click" Margin="0 0 20 0"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound2Enf1Local"    Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Click="uiEnfrentament_Click" Margin="0 0 20 0"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound2Enf2Visitant" Grid.Row="6" Grid.Column="1" Grid.RowSpan="2" Click="uiEnfrentament_Click" Margin="0 0 20 0"></local:UIEnfrentamentsWestern>
 
-                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound3Enf1Local"    Grid.Row="1" Grid.Column="2" Click="uienfrentament_Click" Grid.RowSpan="2" Margin="0 0 35 0"></local:UIEnfrentamentsWestern>
-                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound3Enf1Visitant" Grid.Row="5" Grid.Column="2" Click="uienfrentament_Click" Grid.RowSpan="2" Margin="0 0 35 5"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound3Enf1Local"    Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Click="uiEnfrentament_Click" Margin="0 0 35 0"></local:UIEnfrentamentsWestern>
+                    <local:UIEnfrentamentsWestern x:Name="uiWesternRound3Enf1Visitant" Grid.Row="5" Grid.Column="2" Grid.RowSpan="2" Click="uiEnfrentament_Click" Margin="0 0 35 5"></local:UIEnfrentamentsWestern>
 
-                    <local:UIEnfrentamentsFinals x:Name="uiFinalsLocal"    Grid.Row="3" Grid.Column="3" Margin="0" Click="uienfrentament_Click" HorizontalAlignment="Center"></local:UIEnfrentamentsFinals>
-                    <local:UIEnfrentamentsFinals x:Name="uiFinalsVisitant" Grid.Row="4" Grid.Column="3" Margin="0" Click="uienfrentament_Click" HorizontalAlignment="Center"></local:UIEnfrentamentsFinals>
+                    <local:UIEnfrentamentsFinals x:Name="uiFinalsLocal"    Grid.Row="3" Grid.Column="3" Click="uiEnfrentament_Click" Margin="0" HorizontalAlignment="Center"></local:UIEnfrentamentsFinals>
+                    <local:UIEnfrentamentsFinals x:Name="uiFinalsVisitant" Grid.Row="4" Grid.Column="3" Click="uiEnfrentament_Click" Margin="0" HorizontalAlignment="Center"></local:UIEnfrentamentsFinals>
 
-                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound3Enf1Local"    Grid.Row="1" Grid.Column="4" Click="uienfrentament_Click" Grid.RowSpan="2" Margin="28 0 0 0"></local:UIEnfrentamentsEastern>
-                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound3Enf1Visitant" Grid.Row="5" Grid.Column="4" Click="uienfrentament_Click" Grid.RowSpan="2" Margin="28 0 0 5"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound3Enf1Local"    Grid.Row="1" Grid.Column="4" Grid.RowSpan="2" Click="uiEnfrentament_Click" Margin="28 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound3Enf1Visitant" Grid.Row="5" Grid.Column="4" Grid.RowSpan="2" Click="uiEnfrentament_Click" Margin="28 0 0 5"></local:UIEnfrentamentsEastern>
 
-                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound2Enf1Local"    Grid.Row="0" Grid.Column="5" Click="uienfrentament_Click" Grid.RowSpan="2" Margin="15 0 0 0"></local:UIEnfrentamentsEastern>
-                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound2Enf1Visitant" Grid.Row="2" Grid.Column="5" Click="uienfrentament_Click" Grid.RowSpan="2" Margin="15 0 0 0"></local:UIEnfrentamentsEastern>
-                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound2Enf2Local"    Grid.Row="4" Grid.Column="5" Click="uienfrentament_Click" Grid.RowSpan="2" Margin="15 0 0 0"></local:UIEnfrentamentsEastern>
-                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound2Enf2Visitant" Grid.Row="6" Grid.Column="5" Click="uienfrentament_Click" Grid.RowSpan="2" Margin="15 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound2Enf1Local"    Grid.Row="0" Grid.Column="5" Grid.RowSpan="2" Click="uiEnfrentament_Click" Margin="15 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound2Enf1Visitant" Grid.Row="2" Grid.Column="5" Grid.RowSpan="2" Click="uiEnfrentament_Click" Margin="15 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound2Enf2Local"    Grid.Row="4" Grid.Column="5" Grid.RowSpan="2" Click="uiEnfrentament_Click" Margin="15 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound2Enf2Visitant" Grid.Row="6" Grid.Column="5" Grid.RowSpan="2" Click="uiEnfrentament_Click" Margin="15 0 0 0"></local:UIEnfrentamentsEastern>
 
-                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf1Local"    Grid.Row="0" Grid.Column="6" Click="uienfrentament_Click" Margin="0 0 0 0"></local:UIEnfrentamentsEastern>
-                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf1Visitant" Grid.Row="1" Grid.Column="6" Click="uienfrentament_Click" Margin="0 0 0 0"></local:UIEnfrentamentsEastern>
-                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf2Local"    Grid.Row="2" Grid.Column="6" Click="uienfrentament_Click" Margin="0 0 0 0"></local:UIEnfrentamentsEastern>
-                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf2Visitant" Grid.Row="3" Grid.Column="6" Click="uienfrentament_Click" Margin="0 0 0 0"></local:UIEnfrentamentsEastern>
-                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf3Local"    Grid.Row="4" Grid.Column="6" Click="uienfrentament_Click" Margin="0 0 0 0"></local:UIEnfrentamentsEastern>
-                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf3Visitant" Grid.Row="5" Grid.Column="6" Click="uienfrentament_Click" Margin="0 0 0 0"></local:UIEnfrentamentsEastern>
-                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf4Local"    Grid.Row="6" Grid.Column="6" Click="uienfrentament_Click" Margin="0 0 0 0"></local:UIEnfrentamentsEastern>
-                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf4Visitant" Grid.Row="7" Grid.Column="6" Click="uienfrentament_Click" Margin="0 0 0 10"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf1Local"    Grid.Row="0" Grid.Column="6" Click="uiEnfrentament_Click" Margin="0 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf1Visitant" Grid.Row="1" Grid.Column="6" Click="uiEnfrentament_Click" Margin="0 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf2Local"    Grid.Row="2" Grid.Column="6" Click="uiEnfrentament_Click" Margin="0 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf2Visitant" Grid.Row="3" Grid.Column="6" Click="uiEnfrentament_Click" Margin="0 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf3Local"    Grid.Row="4" Grid.Column="6" Click="uiEnfrentament_Click" Margin="0 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf3Visitant" Grid.Row="5" Grid.Column="6" Click="uiEnfrentament_Click" Margin="0 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf4Local"    Grid.Row="6" Grid.Column="6" Click="uiEnfrentament_Click" Margin="0 0 0 0"></local:UIEnfrentamentsEastern>
+                    <local:UIEnfrentamentsEastern x:Name="uiEasternRound1Enf4Visitant" Grid.Row="7" Grid.Column="6" Click="uiEnfrentament_Click" Margin="0 0 0 10"></local:UIEnfrentamentsEastern>
                 </Grid>
             </Grid>
 

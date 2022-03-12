@@ -597,6 +597,16 @@ namespace NBA.View
             canviEstat(Estat.ALTA);
         }
 
+        private void UIPlayer_Click(object sender, EventArgs e)
+        {
+            Debug.WriteLine("ENTRO!!");
+            if (dgrTeams.SelectedItem != null && lsvPlayers.ItemsSource != null)
+            {
+                Team te = (Team)dgrTeams.SelectedItem;
+                lsvPlayers.ItemsSource = PlayerDB.GetLlistaPlayers(te.TeamId);
+            }
+        }
+
         /*
         private void lsvPlayers_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
         {

@@ -35,6 +35,8 @@ namespace NBA.View
 
         StorageFolder appDataFolder = ApplicationData.Current.LocalFolder;
 
+        public event EventHandler Click;
+
         public Player ElPlayer
         {
             get { return (Player)GetValue(ElPlayerProperty); }
@@ -139,6 +141,7 @@ namespace NBA.View
             if (result == ContentDialogResult.Primary)
             {
                 PlayerDB.delete(ElPlayer.PlayerId);
+                Click?.Invoke(this, new EventArgs());
             }
         }
     }

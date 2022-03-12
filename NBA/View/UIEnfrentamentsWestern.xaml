@@ -9,21 +9,23 @@
     d:DesignHeight="60"
     d:DesignWidth="300">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <TextBlock x:Name="txbSeedEquip" Margin="10 0" VerticalAlignment="Center" Grid.Column="0" FontSize="20"/>
+    <Button x:Name="btnUI" Background="Transparent" Click="btnUI_Click">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="txbSeedEquip" Margin="10 0" VerticalAlignment="Center" Grid.Column="0" FontSize="20"/>
 
-        <Image Height="50" VerticalAlignment="Center"  Grid.Column="1">
-            <Image.Source>
-                <SvgImageSource x:Name="imgLogoTeam" RasterizePixelHeight="400" RasterizePixelWidth="400"/>
-            </Image.Source>
-        </Image>
-        <Border x:Name="brdEquip" CornerRadius="10" Height="22" Width="22"  Grid.Column="2" HorizontalAlignment="Right" Margin="10">
-            <TextBlock x:Name="txbPuntuacioEquip" Margin="0 -2 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Foreground="White"/>
-        </Border>
-    </Grid>
+            <Image Height="50" VerticalAlignment="Center"  Grid.Column="1">
+                <Image.Source>
+                    <SvgImageSource x:Name="imgLogoTeam" RasterizePixelHeight="400" RasterizePixelWidth="400"/>
+                </Image.Source>
+            </Image>
+            <Border x:Name="brdEquip" CornerRadius="10" Height="22" Width="22"  Grid.Column="2" HorizontalAlignment="Right" Margin="10">
+                <TextBlock x:Name="txbPuntuacioEquip" Margin="0 -2 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Foreground="White"/>
+            </Border>
+        </Grid>
+    </Button>
 </UserControl>

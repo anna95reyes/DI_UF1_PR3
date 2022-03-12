@@ -9,29 +9,31 @@
     d:Height="60"
     d:Width="120">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="47px"/>
-            <ColumnDefinition Width="auto"/>
-        </Grid.ColumnDefinitions>
+    <Button x:Name="btnUI" Background="Transparent" Click="btnUI_Click">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="47px"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
 
-        <TextBlock x:Name="txbSeedEquip" Margin="10 0" VerticalAlignment="Center" Grid.Column="0" FontSize="20"/>
+            <TextBlock x:Name="txbSeedEquip" Margin="10 0" VerticalAlignment="Center" Grid.Column="0" FontSize="20"/>
 
-        <Grid  Grid.Column="1">
-            <Image x:Name="imgTeamGuanyador" Source="/Assets/nba_images/larry.PNG" VerticalAlignment="Center" 
-                   HorizontalAlignment="Center" Visibility="Collapsed"/>
+            <Grid  Grid.Column="1">
+                <Image x:Name="imgTeamGuanyador" Source="/Assets/nba_images/larry.PNG" VerticalAlignment="Center" 
+                       HorizontalAlignment="Center" Visibility="Collapsed"/>
 
-            <Image Height="40" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Image.Source>
-                    <SvgImageSource x:Name="imgLogoTeam" RasterizePixelHeight="400" RasterizePixelWidth="400"/>
-                </Image.Source>
-            </Image>
+                <Image Height="40" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Image.Source>
+                        <SvgImageSource x:Name="imgLogoTeam" RasterizePixelHeight="400" RasterizePixelWidth="400"/>
+                    </Image.Source>
+                </Image>
+            </Grid>
+
+            <Border x:Name="brdEquip" CornerRadius="10" Height="22" Width="22"  Grid.Column="2" HorizontalAlignment="left" Margin="10">
+                <TextBlock x:Name="txbPuntuacioEquip" Margin="0 -2 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Foreground="White"/>
+            </Border>
+
         </Grid>
-
-        <Border x:Name="brdEquip" CornerRadius="10" Height="22" Width="22"  Grid.Column="2" HorizontalAlignment="left" Margin="10">
-            <TextBlock x:Name="txbPuntuacioEquip" Margin="0 -2 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Foreground="White"/>
-        </Border>
-        
-    </Grid>
+    </Button>
 </UserControl>

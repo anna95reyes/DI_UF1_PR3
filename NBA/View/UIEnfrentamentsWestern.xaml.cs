@@ -75,7 +75,26 @@ namespace NBA.View
             DependencyProperty.Register("WinsTeam", typeof(int), typeof(UIEnfrentamentsWestern), new PropertyMetadata(0, EnfrentamentsWesternChangedCallbackStatic));
 
 
+        public int Round
+        {
+            get { return (int)GetValue(RoundProperty); }
+            set { SetValue(RoundProperty, value); }
+        }
 
+        // Using a DependencyProperty as the backing store for Round.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RoundProperty =
+            DependencyProperty.Register("Round", typeof(int), typeof(UIEnfrentamentsWestern), new PropertyMetadata(0));
+
+
+        public int Enfrentament
+        {
+            get { return (int)GetValue(EnfrentamentProperty); }
+            set { SetValue(EnfrentamentProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Enfrentament.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EnfrentamentProperty =
+            DependencyProperty.Register("Enfrentament", typeof(int), typeof(UIEnfrentamentsWestern), new PropertyMetadata(0));
 
         private static void EnfrentamentsWesternChangedCallbackStatic(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -113,7 +132,10 @@ namespace NBA.View
 
         }
 
-
+        private void btnUI_Click(object sender, RoutedEventArgs e)
+        {
+            Click?.Invoke(this, new EventArgs());
+        }
 
     }
 

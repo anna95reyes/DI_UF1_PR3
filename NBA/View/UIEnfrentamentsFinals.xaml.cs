@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -77,6 +78,26 @@ namespace NBA.View
 
 
 
+        public int Round
+        {
+            get { return (int)GetValue(RoundProperty); }
+            set { SetValue(RoundProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Round.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RoundProperty =
+            DependencyProperty.Register("Round", typeof(int), typeof(UIEnfrentamentsFinals), new PropertyMetadata(0));
+
+        public int Enfrentament
+        {
+            get { return (int)GetValue(EnfrentamentProperty); }
+            set { SetValue(EnfrentamentProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Enfrentament.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EnfrentamentProperty =
+            DependencyProperty.Register("Enfrentament", typeof(int), typeof(UIEnfrentamentsFinals), new PropertyMetadata(0));
+
         private static void EnfrentamentsFinalsChangedCallbackStatic(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             UIEnfrentamentsFinals ef = (UIEnfrentamentsFinals)d;
@@ -113,7 +134,12 @@ namespace NBA.View
             }
 
 
+
         }
 
+        private void btnUI_Click(object sender, RoutedEventArgs e)
+        {
+            Click?.Invoke(this, new EventArgs());
+        }
     }
 }
